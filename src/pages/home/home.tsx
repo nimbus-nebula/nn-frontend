@@ -31,7 +31,8 @@ function Home() {
                         <h3 className='input-label'> Password </h3>
                             <input className='input-field' type="password" id="fname" name="fname" placeholder={"Password"}/> <br/>
                     </div> 
-                    <input className='submit-button' type={"submit"} value={"Log In"} onSubmit={OnLogin}/>  
+                    <input className='submit-button' type={"submit"} value={"Log In"} onSubmit={OnLogin}/> 
+                    <a className='anchor' href="/signup">Create An Account</a> 
                 </form>
             </header>
             <body>

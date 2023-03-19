@@ -79,8 +79,8 @@
 }
 
 .section-divider {
-   height: 100%;
-   transform: rotate(5deg);
+  height: 100%;
+  transform: rotate(5deg);
 }
 
 .login-form {
@@ -153,6 +153,18 @@
   left: 90%;
 }
 
+.anchor {
+  /* font-family: 'Poppins'; */
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 800%;
+  text-align: center;
+  text-decoration-line: underline;
+  text-transform: capitalize;
+  color: #ffffff;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .app-logo {
     animation: app-logo-spin infinite 20s linear;
@@ -162,4 +174,3 @@
 .app-link {
   color: #61dafb;
 }
-
