@@ -19,6 +19,9 @@ function Home() {
                         "Create Your Cluster of Files"
                     </div>
                 </div>
+                <div className='section-divider'>
+                    <img src={divider} className="section-divider" alt="logo"/>
+                </div>
                 <form className='login-form'>
                     <div className='input-label-text-field'>
                         <h3 className='input-label'> Email </h3>

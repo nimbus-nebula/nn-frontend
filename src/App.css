@@ -79,9 +79,8 @@
 }
 
 .section-divider {
-  position: absolute;
-  width: 1586.61px;
-  left: 398.78px;
+   height: 100%;
+   transform: rotate(5deg);
 }
 
 .login-form {
@@ -110,7 +109,7 @@
   font-family: "Poppins";
   font-style: normal;
   font-weight: 500;
-  font-size: 26.253px;
+  font-size: 35.253px;
   line-height: 39px;
   text-transform: capitalize;
   margin-bottom: 8px;
