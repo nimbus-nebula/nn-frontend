@@ -138,6 +138,7 @@
 }
 
 .submit-button {
+  margin-top: 50px;
   width: 174px;
   height: 57px;
   background: #afadaf;
@@ -155,10 +156,10 @@
 
 .anchor {
   /* font-family: 'Poppins'; */
+  margin-top: 50px;
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
-  line-height: 800%;
   text-align: center;
   text-decoration-line: underline;
   text-transform: capitalize;

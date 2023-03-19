@@ -39,5 +39,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@ant-design/icons": "^5.0.1",
+    "react-router-dom": "^6.9.0"
   }
 }
