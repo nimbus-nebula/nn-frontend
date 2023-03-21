@@ -1,11 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import { EyeInvisibleOutlined, EyeOutlined } from "@ant-design/icons";
-import "../App.css";
+import "./global-components.css";
 
 type DataFieldsProps = {
   Field: string;
-  IsPassword?: boolean;
+  IsFullSize?: boolean;
+  Page: string;
 };
 
 type LinkProps = {
@@ -15,6 +16,12 @@ type LinkProps = {
 
 type PasswordProps = {
   Header: string;
+  Page: string;
+};
+
+type PasswordRevealIconProps = {
+  Visible: boolean;
+  SetVisible: React.Dispatch<boolean>;
 };
 
 export function Logo() {
@@ -30,14 +37,20 @@ export function Slogan() {
 }
 
 export function DataField(props: DataFieldsProps) {
-  const IsPassword: boolean = props.IsPassword ? props.IsPassword : false;
   const DataField: string = props.Field ? props.Field : "";
-  let Type: string = !IsPassword ? "text" : "password";
+  const IsFullSize: boolean = props.IsFullSize ? props.IsFullSize : true;
+  const Page: string = props.Page.toLowerCase();
+  console.log(Page);
+  const InputLabelTextFieldClass: string = `input-label-text-field-${Page}`;
+  const InputLabelClass: string = `input-label-${Page}`;
+  const InputFieldClass: string = `input-field-${Page}`;
+  console.log(InputLabelTextFieldClass);
+  let Type: string = "text";
   return (
-    <div className="input-label-text-field">
-      <h3 className="input-label"> {DataField} </h3>
+    <div className={InputLabelTextFieldClass}>
+      <h3 className={InputLabelClass}> {DataField} </h3>
       <input
-        className="input-field"
+        className={InputFieldClass}
         type={Type}
         id={DataField.toLowerCase()}
         name={DataField.toLowerCase()}
@@ -47,28 +60,41 @@ export function DataField(props: DataFieldsProps) {
   );
 }
 
+function PasswordRevealIcon(props: PasswordRevealIconProps) {
+  return (
+    <div onClick={() => props.SetVisible(!props.Visible)}>
+      {props.Visible ? (
+        <EyeOutlined></EyeOutlined>
+      ) : (
+        <EyeInvisibleOutlined></EyeInvisibleOutlined>
+      )}
+    </div>
+  );
+}
+
 export function PasswordField(props: PasswordProps) {
   //TODO: adjust the eye icon location
   const [Password, SetPassword] = useState("");
   const [Visible, SetVisible] = useState(true);
+  const Page: string = props.Page.toLowerCase();
+  const InputLabelTextFieldClass: string = `input-label-text-field-${Page}`;
+  const InputLabelClass: string = `input-label-${Page}`;
+  const InputFieldClass: string = `input-field-${Page}`;
   return (
-    <div className="input-label-text-field">
-      <h3 className="input-label"> {props.Header} </h3>
+    <div className={InputLabelTextFieldClass}>
+      <h3 className={InputLabelClass}> {props.Header} </h3>
       <input
-        className="input-field"
+        className={InputFieldClass}
         type={Visible ? "text" : "password"}
         id="password"
         name="password"
         placeholder="Password"
         onChange={(e) => SetPassword(e.target.value)}
       />
-      <div onClick={() => SetVisible(!Visible)}>
-        {Visible ? (
-          <EyeOutlined></EyeOutlined>
-        ) : (
-          <EyeInvisibleOutlined></EyeInvisibleOutlined>
-        )}
-      </div>
+      <PasswordRevealIcon
+        Visible={Visible}
+        SetVisible={SetVisible}
+      ></PasswordRevealIcon>
     </div>
   );
 }

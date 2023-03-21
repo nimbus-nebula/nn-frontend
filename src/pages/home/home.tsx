@@ -26,7 +26,8 @@ function OnLogin() {}
 function Home() {
   return (
     <div className="home">
-      <header className="app-header">
+      <header></header>
+      <body className="app-header">
         <div className="logo-section">
           <Logo></Logo>
           <Slogan></Slogan>
@@ -35,13 +36,12 @@ function Home() {
           <img src={divider} className="section-divider" alt="logo" />
         </div>
         <form className="login-form">
-          <DataField Field="Email"></DataField>
-          <PasswordField Header="Password"></PasswordField>
+          <DataField Field="Email" Page="Home"></DataField>
+          <PasswordField Header="Password" Page="Home"></PasswordField>
           <SubmitButton></SubmitButton>
           <Link Href="/signup" Text="Create An Account"></Link>
         </form>
-      </header>
-      <body></body>
+      </body>
     </div>
   );
 }

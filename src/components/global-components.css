@@ -1,0 +1,46 @@
+.header {
+  /*position: center;*/
+  /*width: 25.44%;*/
+  /*height: 100%;*/
+  /*right: -20%;*/
+  /*top: -30%;*/
+  font-style: normal;
+  font-weight: bolder;
+  font-size: 75px;
+  line-height: 118px;
+  text-transform: capitalize;
+  color: whitesmoke;
+  /*margin-top: 30px;*/
+}
+
+.input-label-text-field-home {
+  width: max-content;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  left: 881px;
+  top: 136px;
+}
+
+.input-label-home {
+  width: max-content;
+  height: max-content;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 35.253px;
+  line-height: 39px;
+  text-transform: capitalize;
+  margin-bottom: 8px;
+  color: #ccc0cb;
+}
+
+.input-field-home {
+  width: 426.61px;
+  height: 38.13px;
+  /* left: 881px; */
+  top: 30%;
+  background: #e7e7e7;
+  border: #e7e7e7;
+  color: #4a494d;
+}

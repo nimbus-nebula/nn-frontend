@@ -1,0 +1,53 @@
+.signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  background-size: contain;
+  text-align: center;
+  position: fixed;
+}
+
+.input-label-text-field-signup {
+  width: max-content;
+  height: max-content;
+  position: center;
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*margin-right:400px*/
+}
+
+.input-label-signup {
+  width: max-content;
+  height: max-content;
+  /*font-family: "Poppins";*/
+  font-style: normal;
+  font-weight: 350;
+  font-size: 30px;
+  line-height: 39px;
+  text-transform: capitalize;
+  margin-bottom: 8px;
+  color: #ccc0cb;
+}
+
+.input-field-signup {
+  width: 426.61px;
+  height: 38.13px;
+  /* left: 881px; */
+  top: 10%;
+  background: #e7e7e7;
+  border: #e7e7e7;
+  color: #4a494d;
+}
+
+.form-signup {
+  position: center;
+  width: 27.69%;
+  height: max-content;
+  top: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
