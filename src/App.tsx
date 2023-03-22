@@ -3,10 +3,10 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/home/home";
-import SignUp from "./pages/signup/signup";
-import NotFoundPage from "./pages/not-found/not-found";
-import Dashboard from "./pages/dashboard/dashboard";
+import Home from "./components/home/home";
+import SignUp from "./components/signup/signup";
+import NotFoundPage from "./components/not-found/not-found";
+import Dashboard from "./components/dashboard/dashboard";
 
 function App() {
   return (

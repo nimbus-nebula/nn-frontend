@@ -6,7 +6,9 @@ import {
   DataField,
   Link,
   PasswordField,
-} from "../../components/global-components";
+} from "../global-components";
+import "./home-components";
+import { LogInForm } from "./home-components";
 
 const divider: string = `${process.env.PUBLIC_URL}/section-div.svg`;
 
@@ -36,9 +38,7 @@ function Home() {
           <img src={divider} className="section-divider" alt="logo" />
         </div>
         <form className="login-form">
-          <DataField Field="Email" Page="Home"></DataField>
-          <PasswordField Header="Password" Page="Home"></PasswordField>
-          <SubmitButton></SubmitButton>
+          <LogInForm></LogInForm>
           <Link Href="/signup" Text="Create An Account"></Link>
         </form>
       </body>
