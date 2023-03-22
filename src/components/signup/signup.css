@@ -42,12 +42,20 @@
   color: #4a494d;
 }
 
-.form-signup {
-  position: center;
-  width: 27.69%;
-  height: max-content;
-  top: 40%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.signup-form-button {
+  width: 100%;
+  background-color: #afadaf;
+  color: #4a494d;
 }
+
+.field-label {
+  color: #ccc0cb;
+}
+
+/*[title="Email"]  {*/
+/*  color: #CCC0CB !important;*/
+/*}*/
+
+/*[title="Password"] {*/
+/*  color: blue !important;*/
+/*}*/

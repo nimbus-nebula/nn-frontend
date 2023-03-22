@@ -1,29 +1,14 @@
 import React from "react";
-import "../../App.css";
+// import "../../App.css";
 import {
   Logo,
   Slogan,
-  DataField,
-  Link,
-  PasswordField,
 } from "../global-components";
 import "./home-components";
 import { LogInForm } from "./home-components";
+import "./home.css";
 
 const divider: string = `${process.env.PUBLIC_URL}/section-div.svg`;
-
-function SubmitButton() {
-  return (
-    <input
-      className="submit-button"
-      type={"submit"}
-      value={"Log In"}
-      onSubmit={OnLogin}
-    />
-  );
-}
-
-function OnLogin() {}
 
 function Home() {
   return (
@@ -39,7 +24,7 @@ function Home() {
         </div>
         <form className="login-form">
           <LogInForm></LogInForm>
-          <Link Href="/signup" Text="Create An Account"></Link>
+          {/*<Link Href="/signup" Text="Create An Account"></Link>*/}
         </form>
       </body>
     </div>
