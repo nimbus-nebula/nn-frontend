@@ -1,9 +1,6 @@
 import React from "react";
 // import "../../App.css";
-import {
-  Logo,
-  Slogan,
-} from "../global-components";
+import { Logo, Slogan } from "../global-components";
 import "./home-components";
 import { LogInForm } from "./home-components";
 import "./home.css";
@@ -24,7 +21,6 @@ function Home() {
         </div>
         <form className="login-form">
           <LogInForm></LogInForm>
-          {/*<Link Href="/signup" Text="Create An Account"></Link>*/}
         </form>
       </body>
     </div>
