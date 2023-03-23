@@ -5,8 +5,10 @@ import "./signup.css";
 import { Button, Form, Input, Layout, Radio } from "antd";
 import { RegistrationForm } from "./signup-components";
 
+const logo: string = `${process.env.PUBLIC_URL}/nn-logo.svg`;
 function OnCreate() {}
 function SignUp() {
+  
   // TODO: CSS for registration form
   // src: https://ant.design/components/form#components-form-demo-register
   return (
@@ -20,8 +22,10 @@ function SignUp() {
         <body>
           <RegistrationForm></RegistrationForm>
         </body>
-        <Footer style={{ textAlign: "center" }}>
-          Nimbus Nebula ©2023 Created by Software-Elites
+        <Footer className="page-footer">
+          <div>
+            <img src={logo} className="footer-logo" alt="logo"/>
+          </div>
         </Footer>
       </div>
     </Layout>

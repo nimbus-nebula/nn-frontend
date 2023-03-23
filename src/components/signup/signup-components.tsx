@@ -10,12 +10,12 @@ interface DataNodeType {
 
 const formItemLayout = {
   labelCol: {
-    xs: { span: 24 },
-    sm: { span: 8 },
+    // xs: { span: 24 },
+    // sm: { span: 8 },
   },
   wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 16 },
+    // xs: { span: 24 },
+    // sm: { span: 16 },
   },
 };
 
@@ -61,7 +61,7 @@ export const RegistrationForm: React.FC = () => {
         <Space direction="vertical" size="middle">
           <Form.Item
             name="firstname"
-            label={<label className="field-label">First Name</label>}
+            label={<label >First Name</label>}
             className="field-label"
             rules={[
               {
@@ -76,7 +76,7 @@ export const RegistrationForm: React.FC = () => {
 
           <Form.Item
             name="lastname"
-            label={<label className="field-label">Last Name</label>}
+            label={<label>Last Name</label>}
             rules={[
               {
                 required: true,
