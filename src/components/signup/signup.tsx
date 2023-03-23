@@ -19,7 +19,7 @@ function SignUp() {
             Create An Account
           </div>
         </header>
-        <body>
+        <body className="signup-form">
           <RegistrationForm></RegistrationForm>
         </body>
         <Footer className="page-footer">

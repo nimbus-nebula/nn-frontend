@@ -62,7 +62,7 @@ export const RegistrationForm: React.FC = () => {
           <Form.Item
             name="firstname"
             label={<label >First Name</label>}
-            className="field-label"
+            className="field-label-firstname"
             rules={[
               {
                 required: true,
@@ -70,11 +70,12 @@ export const RegistrationForm: React.FC = () => {
                 whitespace: true,
               },
             ]}
-          >
+            >
             <Input placeholder="First Name" style={{ color: "#4A494D" }} />
           </Form.Item>
 
           <Form.Item
+          className="field-label-lastname"
             name="lastname"
             label={<label>Last Name</label>}
             rules={[
@@ -89,8 +90,9 @@ export const RegistrationForm: React.FC = () => {
           </Form.Item>
 
           <Form.Item
+            className="field-label-email"
             name="email"
-            label={<label className="field-label">Email</label>}
+            label={<label>Email</label>}
             rules={[
               {
                 type: "email",
@@ -106,8 +108,9 @@ export const RegistrationForm: React.FC = () => {
           </Form.Item>
 
           <Form.Item
+          className="field-label-password"
             name="password"
-            label={<label className="field-label">Password</label>}
+            label={<label>Password</label>}
             rules={[
               {
                 required: true,
@@ -123,8 +126,9 @@ export const RegistrationForm: React.FC = () => {
           </Form.Item>
 
           <Form.Item
+          className="field-label-confirm-password"
             name="confirm"
-            label={<label className="field-label">Confirm Password</label>}
+            label={<label>Confirm Password</label>}
             dependencies={["password"]}
             hasFeedback
             rules={[
@@ -148,11 +152,11 @@ export const RegistrationForm: React.FC = () => {
           >
             <Input.Password
               placeholder="Confirm Password"
-              style={{ color: "#4A494D" }}
+              style={{ color: "#4A494D"}}
             />
           </Form.Item>
 
-          <Form.Item {...tailFormItemLayout}>
+          <Form.Item {...tailFormItemLayout} className="signup-form-button">
             <Button
               type="primary"
               htmlType="submit"
