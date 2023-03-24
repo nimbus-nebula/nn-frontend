@@ -1,102 +1,106 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../App.css";
+import "./dashboard.css";
 import {
-  UploadOutlined,
-  FileOutlined,
-  FolderOutlined,
   DeleteOutlined,
-  UserOutlined,
+  CloudOutlined,
+  ClockCircleOutlined,
 } from "@ant-design/icons";
-import type { MenuProps } from "antd";
+import { ConfigProvider, MenuProps, Space } from "antd";
 import { Layout, Menu, theme } from "antd";
+import { NewButton } from "./dashboard-components";
+import { UsersGalaxy } from "./users-galaxy/users-galaxy";
+import { Trash } from "./trash/trash";
+import { Logo } from "../global-components";
+import { Recent } from "./recent/recent";
+import { Content } from "antd/es/layout/layout";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Footer, Sider } = Layout;
 const sections: string[][] = [
-  ["All Files", "all-files"],
-  ["All Folders", "all-folders"],
-  ["Upload New File", "upload-new-file"],
-  ["Removed Files", "remove-files"],
+  ["My Galaxy", "galaxy"],
+  ["Black Hole", "trash"],
+  ["Recent", "recent"],
 ];
 const items: MenuProps["items"] = [
-  FileOutlined,
-  FolderOutlined,
-  UploadOutlined,
+  CloudOutlined,
   DeleteOutlined,
+  ClockCircleOutlined,
 ].map((icon, index) => ({
-  key: sections[index][1],
+  key: `${sections[index][1]}`,
   icon: React.createElement(icon),
   label: sections[index][0],
 }));
 
-const contents = (key: string) => {
+const selectContent = (key: string) => {
   switch (key) {
-    case "all-files":
-      return <h1>all-files-page</h1>;
-    case "all-folders":
-      return <h1>all-folders-page</h1>;
-    case "upload-new-file":
-      return <h1>upload-new-files-page</h1>;
-    case "removed-files":
-      return <h1>removed-file-page</h1>;
+    case "galaxy":
+      return <UsersGalaxy></UsersGalaxy>;
+    case "trash":
+      return <Trash></Trash>;
+    case "recent":
+      return <Recent></Recent>;
     default:
-      return <h1>not found / not implemented yet</h1>;
+      break;
   }
 };
 
 export function Dashboard() {
+  //TODO: profile section & footer
+  const [collapsed, setCollapsed] = useState(false);
+  const [selectedMenu, setSelectedMenu] = useState("galaxy");
   const {
     token: { colorBgContainer },
   } = theme.useToken();
   return (
-    <Layout>
-      <Sider
-        style={{
-          overflow: "auto",
-          height: "100vh",
-          position: "fixed",
-          left: 0,
-          top: 0,
-          bottom: 0,
-          background: "#110A1C",
-        }}
-      >
-        <div style={{ height: 32, margin: 16 }} />
-        {/*<Logo></Logo>*/}
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={["4"]}
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: "#A296CA",
+        },
+      }}
+    >
+      <Layout>
+        <Sider
+          width={220}
           style={{ background: "#110A1C" }}
-          items={items}
-        />
-      </Sider>
-      <Layout className="site-layout" style={{ marginLeft: 200 }}>
-        <Header style={{ padding: 0, background: colorBgContainer }} />
-        <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
-          <div
+          className="side-tab"
+          trigger={null}
+          collapsible
+          collapsed={collapsed}
+        >
+          <div style={{ scale: "0.35", marginRight: "105px" }}>
+            <Logo></Logo>
+          </div>
+          <NewButton></NewButton>
+          <Space direction={"vertical"}>
+            <Menu
+              theme="dark"
+              mode="inline"
+              className="menu"
+              items={items}
+              onClick={({ key }) => {
+                setSelectedMenu(key);
+              }}
+            />
+          </Space>
+        </Sider>
+        <Layout className="site-layout">
+          <Header style={{ padding: 0, background: colorBgContainer }}></Header>
+          <Content
             style={{
-              padding: 24,
-              textAlign: "center",
-              background: colorBgContainer,
+              margin: "24px 16px 0",
+              overflow: "initial",
+              marginLeft: 25,
             }}
           >
-            <p>long content</p>
-            {
-              // indicates very long content
-              Array.from({ length: 100 }, (_, index) => (
-                <React.Fragment key={index}>
-                  {index % 20 === 0 && index ? "more" : "..."}
-                  <br />
-                </React.Fragment>
-              ))
-            }
-          </div>
-        </Content>
-        <Footer style={{ textAlign: "center" }}>
-          Nimbus Nebula ©2023 Created by Software-Elites
-        </Footer>
+            {selectContent(selectedMenu)}
+          </Content>
+          <Footer style={{ textAlign: "center" }}>
+            Nimbus Nebula ©2023 Created by Software-Elites
+          </Footer>
+        </Layout>
       </Layout>
-    </Layout>
+    </ConfigProvider>
   );
 }
 

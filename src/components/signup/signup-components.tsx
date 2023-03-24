@@ -61,7 +61,7 @@ export const RegistrationForm: React.FC = () => {
         <Space direction="vertical" size="middle">
           <Form.Item
             name="firstname"
-            label={<label >First Name</label>}
+            label={<label>First Name</label>}
             className="field-label-firstname"
             rules={[
               {
@@ -70,12 +70,12 @@ export const RegistrationForm: React.FC = () => {
                 whitespace: true,
               },
             ]}
-            >
+          >
             <Input placeholder="First Name" style={{ color: "#4A494D" }} />
           </Form.Item>
 
           <Form.Item
-          className="field-label-lastname"
+            className="field-label-lastname"
             name="lastname"
             label={<label>Last Name</label>}
             rules={[
@@ -108,7 +108,7 @@ export const RegistrationForm: React.FC = () => {
           </Form.Item>
 
           <Form.Item
-          className="field-label-password"
+            className="field-label-password"
             name="password"
             label={<label>Password</label>}
             rules={[
@@ -126,7 +126,7 @@ export const RegistrationForm: React.FC = () => {
           </Form.Item>
 
           <Form.Item
-          className="field-label-confirm-password"
+            className="field-label-confirm-password"
             name="confirm"
             label={<label>Confirm Password</label>}
             dependencies={["password"]}
@@ -152,7 +152,7 @@ export const RegistrationForm: React.FC = () => {
           >
             <Input.Password
               placeholder="Confirm Password"
-              style={{ color: "#4A494D"}}
+              style={{ color: "#4A494D" }}
             />
           </Form.Item>
 
