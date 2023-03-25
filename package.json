@@ -21,8 +21,15 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "cross-env CI=true react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "lint": "eslint src"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm test",
+      "pre-push": "npm run lint && npm test"
+    }
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +51,8 @@
   },
   "devDependencies": {
     "@ant-design/icons": "^5.0.1",
+    "cross-env": "^7.0.3",
+    "husky": "^8.0.3",
     "react-router-dom": "^6.9.0"
   }
 }
