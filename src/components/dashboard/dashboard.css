@@ -1,0 +1,51 @@
+.row-rev {
+  /*right: 190px;*/
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.upload-new-file-button {
+  background: #9c748c;
+  display: inline-flex;
+  align-items: center;
+  justify-content: normal;
+  padding: 25px 50px;
+  font-size: 25px;
+  overflow: auto;
+}
+
+.dropdown-choices {
+  font-size: 20px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.resized-logo {
+  scale: 50%;
+}
+
+.side-tab {
+  overflow: auto;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  padding: 16px;
+  top: 0;
+  bottom: 0;
+  background: #110a1c;
+  display: flex;
+  justify-content: center;
+}
+
+.menu {
+  background: #110a1c;
+  font-size: 20px;
+  margin-left: 55px;
+}
+
+.content {
+  padding: 24px;
+}
