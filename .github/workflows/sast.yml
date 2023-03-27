@@ -2,10 +2,9 @@ name: Static Test
 
 on:
   push:
-    branches:
-      - "*" # matches every branch that doesn't contain a '/'
-      - "*/*" # matches every branch containing a single '/'
-      - "**" # matches every branch
+    branches-ignore:
+      - "main"
+
 
 env:
   PYTHON_VERSION: "3.9"
