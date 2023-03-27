@@ -9,9 +9,9 @@ export const UsersGalaxy: React.FC = () => (
   <div className="content">
     <Title>Upload New File</Title>
     <UploadFilesButton></UploadFilesButton>
-    <Title>All File</Title>
+    <Title>Files</Title>
     <Empty style={{ background: "lightgray", padding: "5px" }}></Empty>
-    <Title>All Folder</Title>
+    <Title>Folders</Title>
     <Empty style={{ background: "lightgray", padding: "5px" }}></Empty>
   </div>
 );
