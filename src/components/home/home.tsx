@@ -19,9 +19,9 @@ function Home() {
         <div className="section-divider">
           <img src={divider} className="section-divider" alt="logo" />
         </div>
-        <form className="login-form">
+        <div className="login-form">
           <LogInForm></LogInForm>
-        </form>
+        </div>
       </body>
     </div>
   );

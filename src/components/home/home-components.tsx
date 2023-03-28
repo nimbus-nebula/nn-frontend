@@ -24,7 +24,16 @@ export const LogInForm: React.FC = () => {
       >
         <Form.Item
           name="email"
-          rules={[{ required: true, message: "Please input your Email!" }]}
+          rules={[
+            {
+              type: "email",
+              message: "The input is not valid E-mail!",
+            },
+            {
+              required: true,
+              message: "Please input your Email!",
+            },
+          ]}
         >
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
@@ -35,7 +44,7 @@ export const LogInForm: React.FC = () => {
           name="password"
           rules={[{ required: true, message: "Please input your Password!" }]}
         >
-          <Input
+          <Input.Password
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
             placeholder="Password"
