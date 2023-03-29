@@ -1,40 +1,85 @@
-import React from "react";
+import React, { useState } from "react";
 import "./dashboard.css";
-import { Avatar, Button, Dropdown, MenuProps, Space, Upload } from "antd";
-import { AntDesignOutlined } from "@ant-design/icons";
+import {
+  Avatar,
+  Button,
+  Dropdown,
+  Menu,
+  MenuProps,
+  Space,
+  Upload,
+  Modal,
+  message,
+  Input,
+} from "antd";
+import { AntDesignOutlined, UploadOutlined } from "@ant-design/icons";
 import { props } from "./users-galaxy/users-galaxy-components";
 
-const items: MenuProps["items"] = [
-  {
-    key: "upload-file",
-    label: (
-      <Upload {...props}>
-        <div>Upload New File</div>
-      </Upload>
-    ),
-  },
-  {
-    key: "create-folder",
-    label: <div>Create New Folder</div>,
-  },
-];
+export const NewButton: React.FC = () => {
+  const [uploading, setUploading] = useState(false);
+  const [newFolderName, setNewFolderName] = useState("");
+  const [creatingFolder, setCreatingFolder] = useState(false);
 
-export const NewButton: React.FC = () => (
-  <Space
-    direction="horizontal"
-    style={{ display: "flex", justifyContent: "center" }}
-  >
-    <Space wrap direction="horizontal">
-      <Dropdown
-        menu={{ items }}
-        placement="bottomLeft"
-        className="upload-new-file-button"
+  const handleOptionSelect = (option: string) => {
+    if (option === "createf") {
+      Modal.confirm({
+        title: "Create new folder",
+        content: (
+          <Input
+            placeholder="Folder name"
+            value={newFolderName}
+            onChange={(e) => setNewFolderName(e.target.value)}
+          />
+        ),
+        okText: "Create",
+        cancelText: "Cancel",
+        onOk: () => {
+          setCreatingFolder(true);
+          setTimeout(() => {
+            setCreatingFolder(false);
+            message.success(`Created folder "${newFolderName}"`);
+          }, 1000);
+        },
+        onCancel: () => {
+          setNewFolderName("");
+        },
+        maskClosable: false,
+        closable: false,
+      });
+    }
+  };
+
+  const items = (
+    <Menu>
+      <Menu.Item key="upload-file">
+        <Upload {...props}>Upload New File</Upload>
+      </Menu.Item>
+      <Menu.Item
+        key="create-folder"
+        onClick={() => handleOptionSelect("createf")}
       >
-        <Button>+ NEW</Button>
-      </Dropdown>
+        <div>Create New Folder</div>
+      </Menu.Item>
+    </Menu>
+  );
+
+  return (
+    <Space
+      direction="horizontal"
+      style={{ display: "flex", justifyContent: "center" }}
+    >
+      <Space wrap direction="horizontal">
+        <Dropdown
+          overlay={items}
+          placement="bottomLeft"
+          className="upload-new-file-button"
+        >
+          <Button>+ NEW</Button>
+        </Dropdown>
+      </Space>
     </Space>
-  </Space>
-);
+  );
+};
 
 export const UserProfile: React.FC = () => (
   <div
