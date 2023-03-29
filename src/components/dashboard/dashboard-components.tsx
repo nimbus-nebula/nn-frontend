@@ -5,14 +5,13 @@ import {
   Button,
   Dropdown,
   Menu,
-  MenuProps,
   Space,
   Upload,
   Modal,
   message,
   Input,
 } from "antd";
-import { AntDesignOutlined, UploadOutlined } from "@ant-design/icons";
+import { AntDesignOutlined } from "@ant-design/icons";
 import { props } from "./users-galaxy/users-galaxy-components";
 
 export const NewButton: React.FC = () => {
@@ -26,9 +25,9 @@ export const NewButton: React.FC = () => {
         title: "Create new folder",
         content: (
           <Input
-            placeholder="Folder name"
-            value={newFolderName}
+            placeholder="folder name"
             onChange={(e) => setNewFolderName(e.target.value)}
+            //TODO: folder name is delaying by 1 (starting with "")
           />
         ),
         okText: "Create",
