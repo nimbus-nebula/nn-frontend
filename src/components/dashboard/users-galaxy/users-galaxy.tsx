@@ -7,11 +7,11 @@ const { Title } = Typography;
 
 export const UsersGalaxy: React.FC = () => (
   <div className="content">
-    <Title>Upload New File</Title>
+    <Title level={2}>Upload New File</Title>
     <UploadFilesButton></UploadFilesButton>
-    <Title>Files</Title>
+    <Title level={2}>Files</Title>
     <Empty style={{ background: "lightgray", padding: "5px" }}></Empty>
-    <Title>Folders</Title>
+    <Title level={2}>Folders</Title>
     <Empty style={{ background: "lightgray", padding: "5px" }}></Empty>
   </div>
 );

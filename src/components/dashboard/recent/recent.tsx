@@ -6,7 +6,7 @@ const { Title } = Typography;
 
 export const Recent = () => (
   <div className="content">
-    <Title>Recent</Title>
+    <Title level={2}>Recent</Title>
     <Empty style={{ background: "lightgray", padding: "5px" }}></Empty>
   </div>
 );
