@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import "./dashboard.css";
 import {
   Avatar,
@@ -14,37 +14,56 @@ import {
 import { AntDesignOutlined } from "@ant-design/icons";
 import { props } from "./users-galaxy/users-galaxy-components";
 
-export const NewButton: React.FC = () => {
-  const [uploading, setUploading] = useState(false);
+interface CreateFolderModalProps {
+  visible: boolean;
+  onCreate: () => void;
+  onCancel: () => void;
+}
+
+const CreateFolderModal: React.FC<CreateFolderModalProps> = ({
+  visible,
+  onCreate,
+  onCancel,
+}) => {
   const [newFolderName, setNewFolderName] = useState("");
-  const [creatingFolder, setCreatingFolder] = useState(false);
+
+  const handleOk = () => {
+    onCreate();
+    message.success(`Created folder "${newFolderName}"`);
+    setNewFolderName("");
+  };
+
+  const handleCancel = () => {
+    onCancel();
+    setNewFolderName("");
+  };
+
+  return (
+    <Modal
+      title="Create new folder"
+      visible={visible}
+      onOk={handleOk}
+      onCancel={handleCancel}
+      okText="Create"
+      cancelText="Cancel"
+      maskClosable={false}
+      closable={false}
+    >
+      <Input
+        placeholder="folder name"
+        value={newFolderName}
+        onChange={(e) => setNewFolderName(e.target.value)}
+      />
+    </Modal>
+  );
+};
+
+export const NewButton: React.FC = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const handleOptionSelect = (option: string) => {
     if (option === "createf") {
-      Modal.confirm({
-        title: "Create new folder",
-        content: (
-          <Input
-            placeholder="folder name"
-            onChange={(e) => setNewFolderName(e.target.value)}
-            //TODO: folder name is delaying by 1 (starting with "")
-          />
-        ),
-        okText: "Create",
-        cancelText: "Cancel",
-        onOk: () => {
-          setCreatingFolder(true);
-          setTimeout(() => {
-            setCreatingFolder(false);
-            message.success(`Created folder "${newFolderName}"`);
-          }, 1000);
-        },
-        onCancel: () => {
-          setNewFolderName("");
-        },
-        maskClosable: false,
-        closable: false,
-      });
+      setIsModalVisible(true);
     }
   };
 
@@ -76,6 +95,11 @@ export const NewButton: React.FC = () => {
           <Button>+ NEW</Button>
         </Dropdown>
       </Space>
+      <CreateFolderModal
+        visible={isModalVisible}
+        onCreate={() => setIsModalVisible(false)}
+        onCancel={() => setIsModalVisible(false)}
+      />
     </Space>
   );
 };
