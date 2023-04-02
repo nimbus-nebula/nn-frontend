@@ -47,7 +47,7 @@ export const RegistrationForm: React.FC = () => {
         },
       }}
     >
-      <Form
+      <Form className="signup-form"
         {...formItemLayout}
         form={form}
         name="register"

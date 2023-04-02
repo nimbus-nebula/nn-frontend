@@ -8,21 +8,31 @@
   background-size: contain;
   text-align: center;
   position: fixed;
+  
+  /* center horizontally on larger screens */
+  @media screen and (min-width: 768px) {
+    justify-content: center;
+  }
+  
+  /* center horizontally on smaller screens */
+  @media screen and (max-width: 767px) {
+    justify-content: flex-start;
+  }
 }
 
+
 .input-label-text-field-signup {
-  width: max-content;
+  /* width: max-content;
   height: max-content;
-  position: center;
+  position: center; */
   /*display: flex;*/
   /*flex-direction: column;*/
-  /*margin-right:400px*/
+  /* margin-right:400px */
 }
 
 .input-label-signup {
   width: max-content;
   height: max-content;
-  /* font-family: "Poppins"; */
   font-style: normal;
   font-weight: 350;
   font-size: 30px;
@@ -44,56 +54,69 @@
 
 .signup-form-button {
   position: absolute;
-  left: 60%;
-  bottom: -90%;
+  left: 38%;
+  bottom: 40.19%;
 }
 
 .field-label-firstname {
   position: absolute;
-  width: 349.14px;
-  height: 72.69px;
-  left: 345px;
-  top: 203px;
+  width: 21.81%;
+  height: 2.38%;
+  left: 25.56%;
+  top: 14.88%;
+  padding-bottom: 40px;
 }
 
 .field-label-lastname {
   position: absolute;
-  width: 349.92px;
-  height: 71.9px;
-  left: 724.87px;
-  top: 203.79px;
+  width: 21.81%;
+  height: 2.38%;
+  left: 49.38%;
+  top: 14.88%;
+  padding-bottom: 40px;
 }
 
 .field-label-email {
   position: absolute;
-  width: 729.8px;
-  height: 72.69px;
-  left: 345px;
-  top: 282.8px;
+  width: 45.63%;
+  height: 2.38%;
+  left: 25.56%;
+  top: 19.88%;
+  padding-top: 60px;
+  padding-bottom: 40px;
 }
 
 .field-label-password {
+  padding-top: 60px;
+  padding-bottom: 40px;
   position: absolute;
-  width: 730px;
-  height: 81.47px;
-  left: 345px;
-  top: 387px;
+  width: 45.63%;
+  height: 2.38%;
+  left: 25.56%;
+  top: 26.69%;
 }
 
 .field-label-confirm-password {
-  position: absolute;
-  width: 729.8px;
-  height: 81.38px;
-  left: 345px;
-  top: 496.13px;
-}
-
-.signup-form {
+  padding-top: 60px;
+  padding-bottom: 40px;
   position: absolute;
   width: 45.63%;
-  height: 30.31%;
+  height: 2.38%;
   left: 25.56%;
-  top: 5.69%;
+  top: 33.50%;
+}
+
+.signup-form{
+  /* position: absolute; */
+  /* left: 32.5%; */
+ /* top: 0;
+  width: 150%;
+  height: 150%; */
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+
+
 }
 
 .ant-form-item-label label {
@@ -120,7 +143,7 @@
   width: 38.94%;
   height: 5.44%;
   left: 32.5%;
-  top: 3.81%;
+  top: 0;
 
   font-family: "Poppins";
   font-style: normal;
