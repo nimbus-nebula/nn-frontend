@@ -34,7 +34,7 @@ export const UploadFilesButton: React.FC = () => (
     >
       <InboxOutlined />
     </p>
-    <p className="ant-upload-text" style={{ fontSize: "30px" }}>
+    <p className="ant-upload-text" style={{ fontSize: "20px" }}>
       Click or drag file to this area to upload
     </p>
     <p className="ant-upload-hint">

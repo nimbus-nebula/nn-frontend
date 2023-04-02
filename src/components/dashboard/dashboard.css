@@ -9,12 +9,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: normal;
-  padding: 25px 50px;
-  font-size: 25px;
-}
-
-.dropdown-choices {
-  font-size: 20px;
+  padding: 21px 42px;
+  font-size: 19px;
 }
 
 .center {
@@ -41,7 +37,7 @@
 
 .menu {
   background: #110a1c;
-  font-size: 20px;
+  font-size: 17px;
   margin-left: 55px;
 }
 

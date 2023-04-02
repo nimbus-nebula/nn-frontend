@@ -6,7 +6,7 @@ const { Title } = Typography;
 
 export const Trash = () => (
   <div className="content">
-    <Title>Recently Deleted Item</Title>
+    <Title level={2}>Recently Deleted Item</Title>
     <Empty style={{ background: "lightgray", padding: "5px" }}></Empty>
   </div>
 );
