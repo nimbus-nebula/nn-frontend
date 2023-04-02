@@ -8,7 +8,7 @@ import {
 } from "@ant-design/icons";
 import { ConfigProvider, MenuProps, Space } from "antd";
 import { Layout, Menu, theme } from "antd";
-import { NewButton } from "./dashboard-components";
+import { NewButton, UserProfile } from "./dashboard-components";
 import { UsersGalaxy } from "./users-galaxy/users-galaxy";
 import { Trash } from "./trash/trash";
 import { Logo } from "../global-components";
@@ -85,7 +85,16 @@ export function Dashboard() {
           </Space>
         </Sider>
         <Layout className="site-layout">
-          <Header style={{ padding: 0, background: colorBgContainer }}></Header>
+          <Header
+            style={{
+              padding: 0,
+              background: colorBgContainer,
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+          >
+            <UserProfile onLogout={() => console.log("User logged out")} />
+          </Header>
           <Content
             style={{
               margin: "24px 16px 0",
