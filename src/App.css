@@ -30,7 +30,28 @@
   position: fixed;
 }
 
-.background {
+.signup-background{
+  background: linear-gradient(63.6deg, rgba(17, 10, 28, 0.85) 0%, rgba(17, 10, 28, 0.796875) 34.99%, rgba(17, 10, 28, 0.790945) 38.75%, rgba(156, 116, 140, 0.85) 103.33%, rgba(17, 10, 28, 0) 103.34%);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  /*filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));*/
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  background-position: center;
+  min-height: 100%;
+  font-size: calc(10px + 2vmin);
+  /*background-size: contain;*/
+  position: fixed;
+}
+
+
+
+
+.background{
   background-color: #110a1c;
   background-image: linear-gradient(
     63.6deg,

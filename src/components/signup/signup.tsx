@@ -11,13 +11,14 @@ function SignUp() {
   // src: https://ant.design/components/form#components-form-demo-register
   return (
     <Layout>
-      <div className="signup background">
+      <div className="signup-background">
+        <div className="signup-page">
         <header>
           <div className="header" style={{ textAlign: "center" }}>
             Create An Account
           </div>
         </header>
-        <body className="signup-form">
+        <body>
           <RegistrationForm></RegistrationForm>
         </body>
         <Footer className="page-footer">
@@ -25,6 +26,7 @@ function SignUp() {
             <img src={logo} className="footer-logo" alt="logo" />
           </div>
         </Footer>
+        </div>    
       </div>
     </Layout>
   );
