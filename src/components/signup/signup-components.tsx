@@ -52,45 +52,47 @@ export const RegistrationForm: React.FC = () => {
         form={form}
         name="register"
         onFinish={onFinish}
-        style={{ width: 600 }}
         scrollToFirstError
         size="large"
         layout="vertical"
         labelAlign="left"
       >
         <Space direction="vertical" size="middle">
-          <Form.Item
-            name="firstname"
-            label={<label>First Name</label>}
-            className="field-label-firstname"
-            rules={[
-              {
-                required: true,
-                message: "This field is required!",
-                whitespace: true,
-              },
-            ]}
-          >
-            <Input placeholder="First Name" style={{ color: "#4A494D" }} />
-          </Form.Item>
+        <div className="form-fields-container">
+        <div className="form-fields-row">
+            <Form.Item
+              name="firstname"
+              label={<label>First Name</label>}
+              rules={[
+                {
+                  required: true,
+                  message: "This field is required!",
+                  whitespace: true,
+                },
+              ]}
+              className="field-firstname"
+            >
+              <Input placeholder="First Name" style={{ color: "#4A494D" }} />
+            </Form.Item>
 
-          <Form.Item
-            className="field-label-lastname"
-            name="lastname"
-            label={<label>Last Name</label>}
-            rules={[
-              {
-                required: true,
-                message: "This field is required!",
-                whitespace: true,
-              },
-            ]}
-          >
-            <Input placeholder="Last Name" style={{ color: "#4A494D" }} />
-          </Form.Item>
+            <Form.Item
+              name="lastname"
+              label={<label>Last Name</label>}
+              rules={[
+                {
+                  required: true,
+                  message: "This field is required!",
+                  whitespace: true,
+                },
+              ]}
+              className="field-lastname"
+            >
+              <Input placeholder="Last Name" style={{ color: "#4A494D" }} />
+            </Form.Item>
+          </div>
+        </div>
 
-          <Form.Item
-            className="field-label-email"
+        <Form.Item
             name="email"
             label={<label>Email</label>}
             rules={[
@@ -103,12 +105,12 @@ export const RegistrationForm: React.FC = () => {
                 message: "This field is required!",
               },
             ]}
+            className="field-email"
           >
             <Input placeholder="Email" style={{ color: "#4A494D" }} />
           </Form.Item>
 
           <Form.Item
-            className="field-label-password"
             name="password"
             label={<label>Password</label>}
             rules={[
@@ -118,6 +120,7 @@ export const RegistrationForm: React.FC = () => {
               },
             ]}
             hasFeedback
+            className="field-password"
           >
             <Input.Password
               placeholder="Password"
@@ -126,7 +129,6 @@ export const RegistrationForm: React.FC = () => {
           </Form.Item>
 
           <Form.Item
-            className="field-label-confirm-password"
             name="confirm"
             label={<label>Confirm Password</label>}
             dependencies={["password"]}
@@ -144,30 +146,33 @@ export const RegistrationForm: React.FC = () => {
                   return Promise.reject(
                     new Error(
                       "The two passwords that you entered do not match!"
-                    )
-                  );
-                },
-              }),
-            ]}
-          >
-            <Input.Password
-              placeholder="Confirm Password"
-              style={{ color: "#4A494D" }}
-            />
-          </Form.Item>
-
-          <Form.Item {...tailFormItemLayout} className="signup-form-button">
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="signup-form-button"
-              shape="round"
+                      )
+                    );
+                  },
+                }),
+              ]}
+              className="field-confirm-password"
             >
-              Register
-            </Button>
-          </Form.Item>
-        </Space>
-      </Form>
+              <Input.Password
+                placeholder="Confirm Password"
+                style={{ color: "#4A494D" }}
+              />
+            </Form.Item>
+      
+            <div className="button-container">
+  <Form.Item {...tailFormItemLayout} className="signup-form-button-wrapper">
+    <Button
+      type="primary"
+      htmlType="submit"
+      className="signup-form-button"
+      shape="round"
+    >
+      Register
+    </Button>
+  </Form.Item>
+    </div>
+          </Space>
+        </Form>
     </ConfigProvider>
   );
 };
