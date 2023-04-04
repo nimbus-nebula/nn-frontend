@@ -130,7 +130,7 @@ export const UserProfile: React.FC<UserProfileProps> = ({ onLogout }) => {
       className="row-rev"
       style={{ display: "flex", justifyContent: "space-around" }}
     >
-      <Dropdown overlay={menu}>
+      <Dropdown overlay={menu} placement="bottomRight">
         <Avatar size={43} icon={<AntDesignOutlined />} />
       </Dropdown>
     </div>

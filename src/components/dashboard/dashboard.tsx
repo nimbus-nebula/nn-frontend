@@ -87,7 +87,7 @@ export function Dashboard() {
         <Layout className="site-layout">
           <Header
             style={{
-              padding: 0,
+              padding: 10,
               background: colorBgContainer,
               display: "flex",
               justifyContent: "flex-end",
