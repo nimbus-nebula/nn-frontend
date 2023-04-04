@@ -47,7 +47,6 @@
   max-width: 800px;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
 }
 
 .form-fields-container {
@@ -59,7 +58,7 @@
 .form-fields-row {
   display: flex;
   justify-content: space-between;
-  gap: 16px; /* Add this property to maintain the gap between first and last name input fields */
+  gap: 16px;
 }
 
 .field-firstname,
@@ -126,7 +125,7 @@
   text-transform: capitalize;
   color: #110a1c;
   margin-bottom: 1rem;
-  margin-top: 1rem; /* Add this line */
+  margin-top: 1rem;
 }
 
 .button-container {
@@ -142,7 +141,6 @@
   padding-left: 0;
   padding-right: 0;
 }
-
 
 @media screen and (max-width: 767px) {
   .header-title {
