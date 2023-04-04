@@ -8,26 +8,13 @@ interface DataNodeType {
   children?: DataNodeType[];
 }
 
-const formItemLayout = {
-  labelCol: {
-    // xs: { span: 24 },
-    // sm: { span: 8 },
-  },
-  wrapperCol: {
-    // xs: { span: 24 },
-    // sm: { span: 16 },
-  },
-};
-
 const tailFormItemLayout = {
   wrapperCol: {
     xs: {
       span: 24,
-      offset: 0,
     },
     sm: {
       span: 16,
-      offset: 8,
     },
   },
 };
@@ -48,49 +35,51 @@ export const RegistrationForm: React.FC = () => {
       }}
     >
       <Form
-        {...formItemLayout}
+        className="signup-form"
         form={form}
         name="register"
         onFinish={onFinish}
-        style={{ width: 600 }}
         scrollToFirstError
         size="large"
         layout="vertical"
         labelAlign="left"
       >
         <Space direction="vertical" size="middle">
-          <Form.Item
-            name="firstname"
-            label={<label>First Name</label>}
-            className="field-label-firstname"
-            rules={[
-              {
-                required: true,
-                message: "This field is required!",
-                whitespace: true,
-              },
-            ]}
-          >
-            <Input placeholder="First Name" style={{ color: "#4A494D" }} />
-          </Form.Item>
+          <div className="form-fields-container">
+            <div className="form-fields-row">
+              <Form.Item
+                name="firstname"
+                label={<label>First Name</label>}
+                rules={[
+                  {
+                    required: true,
+                    message: "This field is required!",
+                    whitespace: true,
+                  },
+                ]}
+                className="field-firstname"
+              >
+                <Input placeholder="First Name" style={{ color: "#4A494D" }} />
+              </Form.Item>
+
+              <Form.Item
+                name="lastname"
+                label={<label>Last Name</label>}
+                rules={[
+                  {
+                    required: true,
+                    message: "This field is required!",
+                    whitespace: true,
+                  },
+                ]}
+                className="field-lastname"
+              >
+                <Input placeholder="Last Name" style={{ color: "#4A494D" }} />
+              </Form.Item>
+            </div>
+          </div>
 
           <Form.Item
-            className="field-label-lastname"
-            name="lastname"
-            label={<label>Last Name</label>}
-            rules={[
-              {
-                required: true,
-                message: "This field is required!",
-                whitespace: true,
-              },
-            ]}
-          >
-            <Input placeholder="Last Name" style={{ color: "#4A494D" }} />
-          </Form.Item>
-
-          <Form.Item
-            className="field-label-email"
             name="email"
             label={<label>Email</label>}
             rules={[
@@ -103,12 +92,12 @@ export const RegistrationForm: React.FC = () => {
                 message: "This field is required!",
               },
             ]}
+            className="field-email"
           >
             <Input placeholder="Email" style={{ color: "#4A494D" }} />
           </Form.Item>
 
           <Form.Item
-            className="field-label-password"
             name="password"
             label={<label>Password</label>}
             rules={[
@@ -118,6 +107,7 @@ export const RegistrationForm: React.FC = () => {
               },
             ]}
             hasFeedback
+            className="field-password"
           >
             <Input.Password
               placeholder="Password"
@@ -126,7 +116,6 @@ export const RegistrationForm: React.FC = () => {
           </Form.Item>
 
           <Form.Item
-            className="field-label-confirm-password"
             name="confirm"
             label={<label>Confirm Password</label>}
             dependencies={["password"]}
@@ -149,6 +138,7 @@ export const RegistrationForm: React.FC = () => {
                 },
               }),
             ]}
+            className="field-confirm-password"
           >
             <Input.Password
               placeholder="Confirm Password"
@@ -156,16 +146,16 @@ export const RegistrationForm: React.FC = () => {
             />
           </Form.Item>
 
-          <Form.Item {...tailFormItemLayout} className="signup-form-button">
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="signup-form-button"
-              shape="round"
+          <div className="button-container">
+            <Form.Item
+              {...tailFormItemLayout}
+              className="signup-form-button-wrapper"
             >
-              Register
-            </Button>
-          </Form.Item>
+              <Button type="primary" htmlType="submit" shape="round">
+                Register
+              </Button>
+            </Form.Item>
+          </div>
         </Space>
       </Form>
     </ConfigProvider>
