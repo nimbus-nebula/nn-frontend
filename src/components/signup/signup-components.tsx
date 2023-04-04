@@ -8,26 +8,13 @@ interface DataNodeType {
   children?: DataNodeType[];
 }
 
-const formItemLayout = {
-  labelCol: {
-    // xs: { span: 24 },
-    // sm: { span: 8 },
-  },
-  wrapperCol: {
-    // xs: { span: 24 },
-    // sm: { span: 16 },
-  },
-};
-
 const tailFormItemLayout = {
   wrapperCol: {
     xs: {
       span: 24,
-      // offset: 0,
     },
     sm: {
       span: 16,
-      // offset: 8,
     },
   },
 };
@@ -49,7 +36,6 @@ export const RegistrationForm: React.FC = () => {
     >
       <Form
         className="signup-form"
-        {...formItemLayout}
         form={form}
         name="register"
         onFinish={onFinish}
@@ -165,11 +151,7 @@ export const RegistrationForm: React.FC = () => {
               {...tailFormItemLayout}
               className="signup-form-button-wrapper"
             >
-              <Button
-                type="primary"
-                htmlType="submit"
-                shape="round"
-              >
+              <Button type="primary" htmlType="submit" shape="round">
                 Register
               </Button>
             </Form.Item>
