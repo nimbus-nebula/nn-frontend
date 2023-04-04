@@ -11,6 +11,7 @@ import {
   message,
   Input,
 } from "antd";
+import { useNavigate } from "react-router-dom";
 import { AntDesignOutlined } from "@ant-design/icons";
 import { props } from "./users-galaxy/users-galaxy-components";
 
@@ -104,11 +105,34 @@ export const NewButton: React.FC = () => {
   );
 };
 
-export const UserProfile: React.FC = () => (
-  <div
-    className="row-rev"
-    style={{ display: "flex", justifyContent: "space-around" }}
-  >
-    <Avatar size={43} icon={<AntDesignOutlined />} />
-  </div>
-);
+interface UserProfileProps {
+  onLogout: () => void;
+}
+
+export const UserProfile: React.FC<UserProfileProps> = ({ onLogout }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    onLogout();
+    navigate("/");
+  };
+
+  const menu = (
+    <Menu>
+      <Menu.Item key="logout" onClick={handleLogout}>
+        Log out
+      </Menu.Item>
+    </Menu>
+  );
+
+  return (
+    <div
+      className="row-rev"
+      style={{ display: "flex", justifyContent: "space-around" }}
+    >
+      <Dropdown overlay={menu} placement="bottomRight">
+        <Avatar size={43} icon={<AntDesignOutlined />} />
+      </Dropdown>
+    </div>
+  );
+};
