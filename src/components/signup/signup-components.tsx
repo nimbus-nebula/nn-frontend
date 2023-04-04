@@ -23,11 +23,11 @@ const tailFormItemLayout = {
   wrapperCol: {
     xs: {
       span: 24,
-      offset: 0,
+      // offset: 0,
     },
     sm: {
       span: 16,
-      offset: 8,
+      // offset: 8,
     },
   },
 };
@@ -47,7 +47,8 @@ export const RegistrationForm: React.FC = () => {
         },
       }}
     >
-      <Form className="signup-form"
+      <Form
+        className="signup-form"
         {...formItemLayout}
         form={form}
         name="register"
@@ -58,41 +59,41 @@ export const RegistrationForm: React.FC = () => {
         labelAlign="left"
       >
         <Space direction="vertical" size="middle">
-        <div className="form-fields-container">
-        <div className="form-fields-row">
-            <Form.Item
-              name="firstname"
-              label={<label>First Name</label>}
-              rules={[
-                {
-                  required: true,
-                  message: "This field is required!",
-                  whitespace: true,
-                },
-              ]}
-              className="field-firstname"
-            >
-              <Input placeholder="First Name" style={{ color: "#4A494D" }} />
-            </Form.Item>
+          <div className="form-fields-container">
+            <div className="form-fields-row">
+              <Form.Item
+                name="firstname"
+                label={<label>First Name</label>}
+                rules={[
+                  {
+                    required: true,
+                    message: "This field is required!",
+                    whitespace: true,
+                  },
+                ]}
+                className="field-firstname"
+              >
+                <Input placeholder="First Name" style={{ color: "#4A494D" }} />
+              </Form.Item>
 
-            <Form.Item
-              name="lastname"
-              label={<label>Last Name</label>}
-              rules={[
-                {
-                  required: true,
-                  message: "This field is required!",
-                  whitespace: true,
-                },
-              ]}
-              className="field-lastname"
-            >
-              <Input placeholder="Last Name" style={{ color: "#4A494D" }} />
-            </Form.Item>
+              <Form.Item
+                name="lastname"
+                label={<label>Last Name</label>}
+                rules={[
+                  {
+                    required: true,
+                    message: "This field is required!",
+                    whitespace: true,
+                  },
+                ]}
+                className="field-lastname"
+              >
+                <Input placeholder="Last Name" style={{ color: "#4A494D" }} />
+              </Form.Item>
+            </div>
           </div>
-        </div>
 
-        <Form.Item
+          <Form.Item
             name="email"
             label={<label>Email</label>}
             rules={[
@@ -146,33 +147,35 @@ export const RegistrationForm: React.FC = () => {
                   return Promise.reject(
                     new Error(
                       "The two passwords that you entered do not match!"
-                      )
-                    );
-                  },
-                }),
-              ]}
-              className="field-confirm-password"
+                    )
+                  );
+                },
+              }),
+            ]}
+            className="field-confirm-password"
+          >
+            <Input.Password
+              placeholder="Confirm Password"
+              style={{ color: "#4A494D" }}
+            />
+          </Form.Item>
+
+          <div className="button-container">
+            <Form.Item
+              {...tailFormItemLayout}
+              className="signup-form-button-wrapper"
             >
-              <Input.Password
-                placeholder="Confirm Password"
-                style={{ color: "#4A494D" }}
-              />
+              <Button
+                type="primary"
+                htmlType="submit"
+                shape="round"
+              >
+                Register
+              </Button>
             </Form.Item>
-      
-            <div className="button-container">
-  <Form.Item {...tailFormItemLayout} className="signup-form-button-wrapper">
-    <Button
-      type="primary"
-      htmlType="submit"
-      className="signup-form-button"
-      shape="round"
-    >
-      Register
-    </Button>
-  </Form.Item>
-    </div>
-          </Space>
-        </Form>
+          </div>
+        </Space>
+      </Form>
     </ConfigProvider>
   );
 };
