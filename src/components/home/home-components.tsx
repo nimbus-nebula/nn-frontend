@@ -1,8 +1,38 @@
-import React from "react";
+import axios from "axios";
+import React, {useState} from "react";
+import { useNavigate } from "react-router-dom";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, ConfigProvider, Form, Input, Space } from "antd";
 
 export const LogInForm: React.FC = () => {
+
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const nnLogin = async () => {
+    try {
+      const payload = {
+        "email": email,
+        "password": password
+      };
+      const res = await axios.post("http://127.0.0.1:8000/auth/login", payload);
+      navigate("/dashboard");
+      console.log(res.data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const handleUpdateValue = (changedValues: any, allValues: any) => {
+    setEmail(allValues.email);
+    setPassword(allValues.password);
+  };
+
+  const handleLogin = () => {
+    nnLogin();
+  };
+
   const onFinish = (values: any) => {
     console.log("Received values of form: ", values);
   };
@@ -16,11 +46,12 @@ export const LogInForm: React.FC = () => {
       }}
     >
       <Form
-        name="normal_login"
-        className="form-login"
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        size="large"
+          name="normal_login"
+          className="form-login"
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          onValuesChange={handleUpdateValue}
+          size="large"
       >
         <Form.Item
           name="email"
@@ -57,6 +88,7 @@ export const LogInForm: React.FC = () => {
               htmlType="submit"
               className="login-form-button"
               shape="round"
+              onClick={handleLogin}
             >
               Log in
             </Button>
