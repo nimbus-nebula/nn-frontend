@@ -1,5 +1,4 @@
 import React from "react";
-// import "../../App.css";
 import { Logo, Slogan } from "../global-components";
 import "./home-components";
 import { LogInForm } from "./home-components";
