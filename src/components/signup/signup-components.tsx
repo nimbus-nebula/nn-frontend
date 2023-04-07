@@ -1,6 +1,8 @@
-import { Button, ConfigProvider, Form, Input, Space } from "antd";
-import React from "react";
 import "./signup.css";
+import React, {useState} from "react";
+import { useNavigate } from "react-router-dom";
+import { Button, ConfigProvider, Form, Input, Space } from "antd";
+import axios from "axios";
 
 interface DataNodeType {
   value: string;
@@ -20,7 +22,36 @@ const tailFormItemLayout = {
 };
 
 export const RegistrationForm: React.FC = () => {
+
+  const navigate = useNavigate();
   const [form] = Form.useForm();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  //TODO: add first name & last name after BE updated
+  //TODO: fix axios when running via docker ==> status code 400 & CORS
+
+  const nnSignUp = async () => {
+    try {
+      const payload = {
+        "email": email,
+        "password": password
+      };
+      const res = await axios.post("http://127.0.0.1:8000/auth/register", payload);
+      navigate("/");
+      console.log(res.data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const handleUpdateValue = (changedValues: any, allValues: any) => {
+    setEmail(allValues.email);
+    setPassword(allValues.password);
+  };
+
+  const handleSignUp = () => {
+    nnSignUp();
+  };
 
   const onFinish = (values: any) => {
     console.log("Received values of form: ", values);
@@ -43,6 +74,7 @@ export const RegistrationForm: React.FC = () => {
         size="large"
         layout="vertical"
         labelAlign="left"
+        onValuesChange={handleUpdateValue}
       >
         <Space direction="vertical" size="middle">
           <div className="form-fields-container">
@@ -151,7 +183,7 @@ export const RegistrationForm: React.FC = () => {
               {...tailFormItemLayout}
               className="signup-form-button-wrapper"
             >
-              <Button type="primary" htmlType="submit" shape="round">
+              <Button type="primary" htmlType="submit" shape="round" onClick={handleSignUp}>
                 Register
               </Button>
             </Form.Item>
