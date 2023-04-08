@@ -1,8 +1,9 @@
 import "./signup.css";
+import axios from "axios";
 import React, {useState} from "react";
+import * as Data from "../../fixtures/data"
 import { useNavigate } from "react-router-dom";
 import { Button, ConfigProvider, Form, Input, Space } from "antd";
-import axios from "axios";
 
 interface DataNodeType {
   value: string;
@@ -23,6 +24,8 @@ const tailFormItemLayout = {
 
 export const RegistrationForm: React.FC = () => {
 
+  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{6,}$/;
+
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [email, setEmail] = useState("");
@@ -36,7 +39,7 @@ export const RegistrationForm: React.FC = () => {
         "email": email,
         "password": password
       };
-      const res = await axios.post("http://127.0.0.1:8000/auth/register", payload);
+      const res = await axios.post(`${Data.PORT}/auth/register`, payload);
       navigate("/");
       console.log(res.data);
     } catch (e) {
@@ -90,8 +93,9 @@ export const RegistrationForm: React.FC = () => {
                   },
                 ]}
                 className="field-firstname"
+                data-test-id="register-field-firstname"
               >
-                <Input placeholder="First Name" style={{ color: "#4A494D" }} />
+                <Input placeholder="First Name" style={{ color: "#4A494D" }} data-test-id="register-input-firstname"/>
               </Form.Item>
 
               <Form.Item
@@ -105,8 +109,9 @@ export const RegistrationForm: React.FC = () => {
                   },
                 ]}
                 className="field-lastname"
+                data-test-id="register-field-lastname"
               >
-                <Input placeholder="Last Name" style={{ color: "#4A494D" }} />
+                <Input placeholder="Last Name" style={{ color: "#4A494D" }} data-test-id="register-input-lastname"/>
               </Form.Item>
             </div>
           </div>
@@ -125,8 +130,9 @@ export const RegistrationForm: React.FC = () => {
               },
             ]}
             className="field-email"
+            data-test-id="register-field-email"
           >
-            <Input placeholder="Email" style={{ color: "#4A494D" }} />
+            <Input placeholder="Email" style={{ color: "#4A494D" }} data-test-id="register-input-email"/>
           </Form.Item>
 
           <Form.Item
@@ -140,10 +146,12 @@ export const RegistrationForm: React.FC = () => {
             ]}
             hasFeedback
             className="field-password"
+            data-test-id="register-field-password"
           >
             <Input.Password
               placeholder="Password"
               style={{ color: "#4A494D" }}
+              data-test-id="register-input-password"
             />
           </Form.Item>
 
@@ -171,10 +179,12 @@ export const RegistrationForm: React.FC = () => {
               }),
             ]}
             className="field-confirm-password"
+            data-test-id="register-field-confirmed-password"
           >
             <Input.Password
               placeholder="Confirm Password"
               style={{ color: "#4A494D" }}
+              data-test-id="register-input-confirmed-password"
             />
           </Form.Item>
 
@@ -183,7 +193,7 @@ export const RegistrationForm: React.FC = () => {
               {...tailFormItemLayout}
               className="signup-form-button-wrapper"
             >
-              <Button type="primary" htmlType="submit" shape="round" onClick={handleSignUp}>
+              <Button type="primary" htmlType="submit" shape="round" onClick={handleSignUp} data-test-id="register-button">
                 Register
               </Button>
             </Form.Item>

@@ -6,7 +6,6 @@ import Home from "./components/home/home";
 import SignUp from "./components/signup/signup";
 import NotFoundPage from "./components/not-found/not-found";
 import Dashboard from "./components/dashboard/dashboard";
-import { UsersGalaxy } from "./components/dashboard/users-galaxy/users-galaxy";
 
 function App() {
   return (
@@ -15,7 +14,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/dashboard" element={<Dashboard />}></Route>
-        <Route path="/dashboard/your-galaxy" element={<UsersGalaxy />}></Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
