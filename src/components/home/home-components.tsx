@@ -11,7 +11,7 @@ export const LogInForm: React.FC = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [cookies, setCookie] = useCookies(['accessToken']);
+  const [cookies, setCookie] = useCookies(['refreshToken']);
 
   const nnLogin = async () => {
     try {
@@ -20,8 +20,8 @@ export const LogInForm: React.FC = () => {
         "password": password
       };
       const res = await axios.post(`${Data.PORT}/auth/login`, payload);
-      const cookies = res.data.access_token;
-      setCookie('accessToken', cookies);
+      const cookies = res.data.refresh_token;
+      setCookie('refreshToken', cookies);
       navigate("/dashboard");
       console.log(res.data);
     } catch (e) {

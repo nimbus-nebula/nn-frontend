@@ -119,15 +119,10 @@ export const UserProfile: React.FC<UserProfileProps> = ({ onLogout }) => {
   const navigate = useNavigate();
   const nnLogOut = async () => {
     try {
-      const userRefreshToken: string = Data.getRefreshToken();
       console.log(`current cookie: ${cookie.cookieName}`);
       console.log(`domain: ${DOMAIN}`);
-      removeCookie('accessToken', { path: '/', domain: DOMAIN });
-      const isDeleted = (cookie.cookieName == undefined);
-      console.log(isDeleted);
-      if (isDeleted) {
-        navigate("/");
-      }
+      removeCookie('refreshToken', { path: '/', domain: DOMAIN });
+      navigate("/");
     } catch (e) {
       console.log(e);
     }
