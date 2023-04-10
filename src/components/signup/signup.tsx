@@ -5,13 +5,12 @@ import { Layout } from "antd";
 import { RegistrationForm } from "./signup-components";
 
 const logo: string = `${process.env.PUBLIC_URL}/nn-logo.svg`;
-function OnCreate() {}
 function SignUp() {
   return (
     <Layout>
       <div className="signup-background">
         <div className="signup-page">
-          <header className="header-title">Create An Account</header>
+          <header className="header-title" data-testid="register-page-header">Create An Account</header>
           <RegistrationForm></RegistrationForm>
           <Footer className="page-footer">
             <div>

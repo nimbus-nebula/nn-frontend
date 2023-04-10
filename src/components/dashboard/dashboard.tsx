@@ -45,7 +45,6 @@ const selectContent = (key: string) => {
 };
 
 export function Dashboard() {
-  //TODO: profile section & footer
   const [collapsed, setCollapsed] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState("galaxy");
   const {

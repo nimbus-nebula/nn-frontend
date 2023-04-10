@@ -2,11 +2,10 @@ import React from "react";
 import { Logo, Slogan } from "../global-components";
 import "./home-components";
 import { LogInForm } from "./home-components";
-import "./home.css";
 
 const divider: string = `${process.env.PUBLIC_URL}/section-div.svg`;
 
-function Home() {
+export function Home() {
   return (
     <div className="home">
       <header></header>
