@@ -1,9 +1,9 @@
 import { LogInForm } from "../src/components/home/home-components";
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import '@testing-library/jest-dom';
-
+//Test
 describe('LogInForm', () => {
     test('renders input elements and buttons', () => {
         const { getByTestId } = render(
