@@ -50,4 +50,4 @@ jobs:
           script: |
             docker rm -f frontend
             docker pull ghcr.io/nimbus-nebula/nn-frontend:latest
-            docker run -d --name=frontend --env-file /home/justyn/nim-neb/.env -p 8000:8000 ghcr.io/nimbus-nebula/nn-frontend:latest
+            docker run -d --name=frontend --env-file /home/justyn/nim-neb/.env -p 8081:80 ghcr.io/nimbus-nebula/nn-frontend:latest
