@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, ConfigProvider, Form, Input, Space } from "antd";
 import * as Data from "../../fixtures/data"
+import { Link } from "react-router-dom";
 
 export const LogInForm: React.FC = () => {
 
@@ -87,18 +88,18 @@ export const LogInForm: React.FC = () => {
         <Form.Item>
           <Space direction="vertical" size="middle">
             <Button
-              type="primary"
-              htmlType="submit"
-              className="login-form-button"
-              shape="round"
-              onClick={handleLogin}
-              data-testid="login-button"
+                type="primary"
+                htmlType="submit"
+                className="login-form-button"
+                shape="round"
+                onClick={handleLogin}
+                data-testid="login-button"
             >
               Log in
             </Button>
-            <a href="/signup" className="link-to-register-page" data-testid="registration-navigator">
+            <Link to="/signup" className="link-to-register-page" data-testid="registration-navigator">
               Register Now!
-            </a>
+            </Link>
           </Space>
         </Form.Item>
       </Form>
