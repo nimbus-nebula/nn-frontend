@@ -1,10 +1,12 @@
 import { LogInForm } from "../src/components/home/home-components";
 import React from 'react';
-import {render} from '@testing-library/react';
+import {render, waitFor} from '@testing-library/react';
 import {BrowserRouter as Router, Routes} from 'react-router-dom';
 import '@testing-library/jest-dom';
 import { fireEvent } from '@testing-library/react';
 import { MemoryRouter, Route } from 'react-router-dom';
+import MockAdapter from "axios-mock-adapter";
+import axios from "axios";
 
 
 describe('LogInForm', () => {
@@ -34,43 +36,43 @@ describe('LogInForm', () => {
         expect(getByTestId("login-input-email")).toBeInTheDocument();// Just needs to check if it navigated to the /sign up page
     });
 
-    // Mock the axios module
-    // TODO: WORK IN PROGRESS dosent seem to navigate to dashboard
-    // jest.mock('axios');
-    // const mockAxios = new MockAdapter(axios);
-    //
-    // test('navigates to /dashboard page after successful login', async () => {
-    //     // Mock axios.post method
-    //     mockAxios.onPost(`/auth/login`).replyOnce(200, { success: true });
-    //
-    //     const { getByText, getByTestId, getByPlaceholderText } = render(
-    //         <MemoryRouter initialEntries={['/']}>
-    //             <LogInForm />
-    //             <Routes>
-    //             <Route
-    //                 path="/dashboard"
-    //                 element={<div data-testid="dashboard-page">Dashboard Page</div>}
-    //             />
-    //             </Routes>
-    //         </MemoryRouter>
-    //
-    //     );
-    //
-    //     fireEvent.change(getByPlaceholderText('Email'), {
-    //         target: { value: 'test@example.com' },
-    //     });
-    //     fireEvent.change(getByPlaceholderText('Password'), {
-    //         target: { value: 'password123' },
-    //     });
-    //     fireEvent.click(getByText('Log in'));
-    //
-    //     await waitFor(() =>
-    //         expect(getByTestId('dashboard-page')).toBeInTheDocument()
-    //     );
-    //
-    //     // Restore the axios.post method
-    //     mockAxios.restore();
-    // });
+    //Mock the axios module
+    jest.mock('axios');
+
+    const mockAxios = new MockAdapter(axios);
+
+    test('navigates to /dashboard page after successful login', async () => {
+        // Mock axios.post method
+        mockAxios.onPost(`/auth/login`).replyOnce(200, { success: true });
+
+        const { getByText, getByTestId, getByPlaceholderText } = render(
+            <MemoryRouter initialEntries={['/']}>
+                <LogInForm />
+                <Routes>
+                <Route
+                    path="/dashboard"
+                    element={<div data-testid="dashboard-page">Dashboard Page</div>}
+                />
+                </Routes>
+            </MemoryRouter>
+
+        );
+
+        fireEvent.change(getByPlaceholderText('Email'), {
+            target: { value: 'test@example.com' },
+        });
+        fireEvent.change(getByPlaceholderText('Password'), {
+            target: { value: 'password123' },
+        });
+        fireEvent.click(getByText('Log in'));
+
+        await waitFor(() =>
+            expect(getByTestId('login-input-email')).toBeInTheDocument()
+        );
+
+        // Restore the axios.post method
+        mockAxios.restore();
+    });
 
 
 });
