@@ -66,7 +66,7 @@ export const LogInForm: React.FC = () => {
               message: "Please input your Email!",
             },
           ]}
-          data-test-id="login-input-email"
+          data-testid="login-input-email"
         >
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
@@ -76,7 +76,7 @@ export const LogInForm: React.FC = () => {
         <Form.Item
           name="password"
           rules={[{ required: true, message: "Please input your Password!" }]}
-          data-test-id="login-input-password"
+          data-testid="login-input-password"
         >
           <Input.Password
             prefix={<LockOutlined className="site-form-item-icon" />}
@@ -92,11 +92,11 @@ export const LogInForm: React.FC = () => {
               className="login-form-button"
               shape="round"
               onClick={handleLogin}
-              data-test-id="login-button"
+              data-testid="login-button"
             >
               Log in
             </Button>
-            <a href="/signup" className="link-to-register-page" data-test-id="registration-navigator">
+            <a href="/signup" className="link-to-register-page" data-testid="registration-navigator">
               Register Now!
             </a>
           </Space>
