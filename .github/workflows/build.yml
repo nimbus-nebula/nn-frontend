@@ -34,3 +34,20 @@ jobs:
         run: |
           docker push ghcr.io/${{ env.BASE_IMG_NAME }}:${{ steps.vars.outputs.sha_short }}
           docker push ghcr.io/${{ env.BASE_IMG_NAME }}:latest
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      packages: read
+
+    steps:
+      - name: Deploy Docker Image on Droplet
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          key: ${{ secrets.SSH_KEY }}
+          username: ${{ secrets.SSH_USERNAME }}
+          script: |
+            docker rm -f frontend
+            docker pull ghcr.io/nimbus-nebula/nn-frontend:latest
+            docker run -d --name=frontend --env-file /home/justyn/nim-neb/.env -p 8081:80 ghcr.io/nimbus-nebula/nn-frontend:latest

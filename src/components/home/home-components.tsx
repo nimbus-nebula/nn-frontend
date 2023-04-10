@@ -18,6 +18,7 @@ export const LogInForm: React.FC = () => {
         "password": password
       };
       const res = await axios.post(`${Data.PORT}/auth/login`, payload);
+      Data.setUsername(email);
       navigate("/dashboard");
       console.log(res.data);
     } catch (e) {
