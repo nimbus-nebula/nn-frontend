@@ -32,7 +32,6 @@ export const RegistrationForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   //TODO: add first name & last name after BE updated
-  //TODO: fix axios when running via docker ==> status code 400 & CORS
 
   const nnSignUp = async () => {
     try {
