@@ -210,3 +210,5 @@ export const RegistrationForm: React.FC = () => {
 </div>
   );
 };
+
+
