@@ -123,6 +123,7 @@ export const UserProfile: React.FC<UserProfileProps> = ({ onLogout }) => {
       console.log(`domain: ${DOMAIN}`);
       removeCookie('refreshToken', { path: '/', domain: DOMAIN });
       navigate("/");
+      message.success("Log Out Successfully");
     } catch (e) {
       console.log(e);
     }
