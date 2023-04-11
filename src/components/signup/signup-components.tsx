@@ -3,7 +3,7 @@ import axios from "axios";
 import React, {useState} from "react";
 import * as Data from "../../fixtures/data"
 import { useNavigate } from "react-router-dom";
-import { Button, ConfigProvider, Form, Input, Space } from "antd";
+import {Button, ConfigProvider, Form, Input, message, Space} from "antd";
 
 
 interface DataNodeType {
@@ -41,8 +41,10 @@ export const RegistrationForm: React.FC = () => {
       };
       const res = await axios.post(`${Data.PORT}/auth/register`, payload);
       navigate("/");
+      message.success("Succesfully Created a New Account!");
       console.log(res.data);
     } catch (e) {
+      message.error("Failed to Create an Account. Please make sure that all input is valid.");
       console.log(e);
     }
   }
@@ -146,6 +148,10 @@ export const RegistrationForm: React.FC = () => {
               {
                 required: true,
                 message: "This field is required!",
+
+              },
+              { pattern: passwordRegex,
+                message: "Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character."
               },
             ]}
             hasFeedback
@@ -168,6 +174,10 @@ export const RegistrationForm: React.FC = () => {
               {
                 required: true,
                 message: "Please confirm your password!",
+              },
+              {
+                pattern: passwordRegex,
+                message: "The format of the password is not correct."
               },
               ({ getFieldValue }) => ({
                 validator(_, value) {

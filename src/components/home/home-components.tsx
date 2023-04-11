@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import { useCookies } from 'react-cookie';
 import { useNavigate } from "react-router-dom";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, ConfigProvider, Form, Input, Space } from "antd";
+import {Button, ConfigProvider, Form, Input, message, Space} from "antd";
 import * as Data from "../../fixtures/data"
 import { Link } from "react-router-dom";
 
@@ -25,9 +25,10 @@ export const LogInForm: React.FC = () => {
       setCookie('refreshToken', cookies);
       Data.setUsername(email);
       navigate("/dashboard");
+      message.success("Log In Successfully");
       console.log(res.data);
     } catch (e) {
-      console.log(e);
+      message.error('Invalid Email/Password!');
     }
   }
 
