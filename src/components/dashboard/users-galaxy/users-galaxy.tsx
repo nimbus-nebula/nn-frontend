@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { Empty, Typography } from "antd";
-import {FileSection, UploadFilesButton} from "./users-galaxy-components";
+import {FileSection, UploadFilesButton, GetData} from "./users-galaxy-components";
 import "../dashboard.css";
+import * as Data from "../../../fixtures/data";
 
 const { Title } = Typography;
 
@@ -20,18 +21,18 @@ const dummyData = {
 };
 
 export const UsersGalaxy: React.FC = () => {
-  const [files] = useState(dummyData.files);
-
-  return (
-    <div className="content">
-      <Title level={2}>Upload New File</Title>
-      <UploadFilesButton></UploadFilesButton>
-      <Title level={2}>Files</Title>
-      <FileSection files={files}></FileSection>
-      <Title level={2}>Folders</Title>
-      <Empty style={{ background: "#f0f0f0", padding: "5px" }}></Empty>
-    </div>
-  );
+    const [files] = useState(dummyData.files);
+    console.log(`This is accessT ${Data.getAccessToken()} | This is refreshT ${Data.getRefreshToken()}`);
+    return (
+        <div className="content">
+            <Title level={2}>Upload New File</Title>
+            <UploadFilesButton></UploadFilesButton>
+            <Title level={2}>Files</Title>
+            <FileSection files={files}></FileSection>
+            <Title level={2}>Folders</Title>
+            <Empty style={{ background: "#f0f0f0", padding: "5px" }}></Empty>
+        </div>
+    );
 };
 
 export default UsersGalaxy;

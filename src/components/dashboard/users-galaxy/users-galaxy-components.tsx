@@ -2,26 +2,48 @@ import React, { useState } from "react";
 import {FileOutlined, InboxOutlined} from "@ant-design/icons";
 import type { UploadProps } from "antd";
 import {Button, message, Upload, Modal, Empty} from "antd";
+import * as Data from "../../../fixtures/data";
+import {useCookies} from "react-cookie";
+import axios from "axios";
 
 const { Dragger } = Upload;
 
-//TODO
+const GetCookies = async () => {
+    const [refreshTokenCookies] = useCookies(['refreshToken']);
+    const [accessTokenCookies] = useCookies(['accessToken']);
+    Data.setRefreshToken(refreshTokenCookies.refreshToken);
+    Data.setAccessToken(accessTokenCookies.accessToken);
+};
+
+GetCookies();
+const accessToken = Data.getAccessToken();
+const refreshToken = Data.getRefreshToken();
+const headers = {
+    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': "multipart/form-data",
+    Accept: '*/*',
+};
+
 export const props: UploadProps = {
-  name: "file",
-  multiple: true,
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-  onDrop(e) {
+    name: "file",
+    multiple: true,
+    method: 'POST',
+    action: `${Data.PORT}/s3/upload`,
+    withCredentials: true,
+    headers: headers,
+    onChange(info) {
+        const { status } = info.file;
+        if (status !== "uploading") {
+            console.log(info.file, info.fileList);
+        }
+        if (status === "done") {
+          message.success(`${info.file.name} file uploaded successfully.`);
+          GetData();
+        } else if (status === "error") {
+          message.error(`${info.file.name} file upload failed.`);
+        }
+    },
+    onDrop(e) {
     console.log("Dropped files", e.dataTransfer.files);
   },
 };
@@ -68,48 +90,25 @@ export const FileSection: React.FC<FileGridProps> = ({ files }) => {
     );
 };
 
-export const CreateNewFolderButton: React.FC = () => {
-  const [open, setOpen] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState("Content of the modal");
+export const GetData = async () => {
 
-  const showModal = () => {
-    setOpen(true);
-  };
+    GetCookies();
+    const refreshToken = Data.getRefreshToken();
+    const accessToken = Data.getAccessToken();
+    const [file, setFiles] = useState([]);
 
-  const createFolder = () => {
-    // TODO
-    setModalText("The modal will be closed after two seconds");
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setOpen(false);
-      setConfirmLoading(false);
-    }, 2000);
-  };
-
-  const cancelCreateFolder = () => {
-    // TODO
-    setOpen(false);
-  };
-
-  return (
-    <>
-      <Button
-        shape="default"
-        onClick={showModal}
-        style={{ padding: "50px 30px", fontSize: "25px" }}
-      >
-        New Folder
-      </Button>
-      <Modal
-        title="Name Your Cluster"
-        open={open}
-        onOk={createFolder}
-        confirmLoading={confirmLoading}
-        onCancel={cancelCreateFolder}
-      >
-        <p>{modalText}</p>
-      </Modal>
-    </>
-  );
+    const headers = {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${accessToken}`
+    };
+    try {
+        // console.log(`THIS IS COOKIES: ${cookies.refreshToken}`)
+        // console.log(`THIS IS REFRESHTK: ${refreshToken}`);
+        const res = await axios.get(`${Data.PORT}/s3/list`, { headers, withCredentials: true });
+        console.log(res);
+        setFiles(res.data.files);
+    } catch (e) {
+        console.log(e);
+    }
 };
