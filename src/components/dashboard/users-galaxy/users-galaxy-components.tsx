@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { InboxOutlined } from "@ant-design/icons";
+import {FileOutlined, InboxOutlined} from "@ant-design/icons";
 import type { UploadProps } from "antd";
-import { Button, message, Upload, Modal } from "antd";
+import {Button, message, Upload, Modal, Empty} from "antd";
 
 const { Dragger } = Upload;
 
@@ -44,7 +44,29 @@ export const UploadFilesButton: React.FC = () => (
   </Dragger>
 );
 
-export const FileSection: React.FC = () => <></>;
+interface FileGridProps {
+    files: any[];
+}
+
+export const FileSection: React.FC<FileGridProps> = ({ files }) => {
+    if (files.length > 0) {
+        return (
+            <div className="file-grid">
+                {files.map((file: any) => (
+                    <div key={file.filename} className="file-item">
+                        <FileOutlined style={{ fontSize: '35px' }} />
+                        <a href={file.url} target="_blank" rel="noopener noreferrer" className="file-link">
+                            {file.filename}
+                        </a>
+                    </div>
+                ))}
+            </div>
+        );
+    }
+    return (
+        <Empty style={{ background: "#f0f0f0", padding: "5px" }}></Empty>
+    );
+};
 
 export const CreateNewFolderButton: React.FC = () => {
   const [open, setOpen] = useState(false);
