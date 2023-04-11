@@ -2,7 +2,7 @@ const localPort : string | undefined  = process.env.REACT_APP_LOCAL_PORT;
 const deployPort = "http://tanpantz.com:8000"
 export const PORT = localPort ? localPort : deployPort;
 let USER_TOKEN = "";
-let userName = "";
+let USER_NAME = "";
 
 export function setUserToken(token: string) {
     USER_TOKEN = token;
@@ -13,9 +13,9 @@ export function getUserToken() {
 }
 
 export function setUsername(username: string) {
-    userName = userName;
+    USER_NAME = username;
 }
 
 export function getUsername() {
-    return userName;
+    return USER_NAME;
 }
