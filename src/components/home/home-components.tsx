@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, {useState} from "react";
+import { useCookies } from 'react-cookie';
 import { useNavigate } from "react-router-dom";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, ConfigProvider, Form, Input, Space } from "antd";
@@ -10,6 +11,7 @@ export const LogInForm: React.FC = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [cookies, setCookie] = useCookies(['refreshToken']);
 
   const nnLogin = async () => {
     try {
@@ -18,6 +20,8 @@ export const LogInForm: React.FC = () => {
         "password": password
       };
       const res = await axios.post(`${Data.PORT}/auth/login`, payload);
+      const cookies = res.data.refresh_token;
+      setCookie('refreshToken', cookies);
       Data.setUsername(email);
       navigate("/dashboard");
       console.log(res.data);
@@ -67,7 +71,7 @@ export const LogInForm: React.FC = () => {
               message: "Please input your Email!",
             },
           ]}
-          data-test-id="login-input-email"
+          data-testid="login-input-email"
         >
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
@@ -77,7 +81,7 @@ export const LogInForm: React.FC = () => {
         <Form.Item
           name="password"
           rules={[{ required: true, message: "Please input your Password!" }]}
-          data-test-id="login-input-password"
+          data-testid="login-input-password"
         >
           <Input.Password
             prefix={<LockOutlined className="site-form-item-icon" />}
@@ -93,11 +97,11 @@ export const LogInForm: React.FC = () => {
               className="login-form-button"
               shape="round"
               onClick={handleLogin}
-              data-test-id="login-button"
+              data-testid="login-button"
             >
               Log in
             </Button>
-            <a href="/signup" className="link-to-register-page" data-test-id="registration-navigator">
+            <a href="/signup" className="link-to-register-page" data-testid="registration-navigator">
               Register Now!
             </a>
           </Space>

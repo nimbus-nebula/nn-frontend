@@ -1,15 +1,25 @@
 const localPort : string | undefined  = process.env.REACT_APP_LOCAL_PORT;
 const deployPort = "http://tanpantz.com:8000"
 export const PORT = localPort ? localPort : deployPort;
-let USER_TOKEN = "";
+export const DOMAIN = PORT == localPort ? "localhost" : "tanpantz.com";
+let ACCESS_TOKEN = "";
+let REFRESH_TOKEN = "";
 let USER_NAME = "";
 
-export function setUserToken(token: string) {
-    USER_TOKEN = token;
+export function setAccessToken(accessToken: string) {
+    ACCESS_TOKEN = accessToken;
 }
 
-export function getUserToken() {
-    return USER_TOKEN;
+export function getAccessToken() {
+    return ACCESS_TOKEN;
+}
+
+export function setRefreshToken(refreshToken: string) {
+    REFRESH_TOKEN = refreshToken;
+}
+
+export function getRefreshToken() {
+    return REFRESH_TOKEN;
 }
 
 export function setUsername(username: string) {

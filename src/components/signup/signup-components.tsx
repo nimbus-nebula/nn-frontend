@@ -31,7 +31,6 @@ export const RegistrationForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   //TODO: add first name & last name after BE updated
-  //TODO: fix axios when running via docker ==> status code 400 & CORS
 
   const nnSignUp = async () => {
     try {
@@ -93,9 +92,9 @@ export const RegistrationForm: React.FC = () => {
                   },
                 ]}
                 className="field-firstname"
-                data-test-id="register-field-firstname"
+                data-testid="register-field-firstname"
               >
-                <Input placeholder="First Name" style={{ color: "#4A494D" }} data-test-id="register-input-firstname"/>
+                <Input placeholder="First Name" style={{ color: "#4A494D" }} data-testid="register-input-firstname"/>
               </Form.Item>
 
               <Form.Item
@@ -109,9 +108,9 @@ export const RegistrationForm: React.FC = () => {
                   },
                 ]}
                 className="field-lastname"
-                data-test-id="register-field-lastname"
+                data-testid="register-field-lastname"
               >
-                <Input placeholder="Last Name" style={{ color: "#4A494D" }} data-test-id="register-input-lastname"/>
+                <Input placeholder="Last Name" style={{ color: "#4A494D" }} data-testid="register-input-lastname"/>
               </Form.Item>
             </div>
           </div>
@@ -130,9 +129,9 @@ export const RegistrationForm: React.FC = () => {
               },
             ]}
             className="field-email"
-            data-test-id="register-field-email"
+            data-testid="register-field-email"
           >
-            <Input placeholder="Email" style={{ color: "#4A494D" }} data-test-id="register-input-email"/>
+            <Input placeholder="Email" style={{ color: "#4A494D" }} data-testid="register-input-email"/>
           </Form.Item>
 
           <Form.Item
@@ -146,12 +145,12 @@ export const RegistrationForm: React.FC = () => {
             ]}
             hasFeedback
             className="field-password"
-            data-test-id="register-field-password"
+            data-testid="register-field-password"
           >
             <Input.Password
               placeholder="Password"
               style={{ color: "#4A494D" }}
-              data-test-id="register-input-password"
+              data-testid="register-input-password"
             />
           </Form.Item>
 
@@ -179,12 +178,12 @@ export const RegistrationForm: React.FC = () => {
               }),
             ]}
             className="field-confirm-password"
-            data-test-id="register-field-confirmed-password"
+            data-testid="register-field-confirmed-password"
           >
             <Input.Password
               placeholder="Confirm Password"
               style={{ color: "#4A494D" }}
-              data-test-id="register-input-confirmed-password"
+              data-testid="register-input-confirmed-password"
             />
           </Form.Item>
 
@@ -193,7 +192,7 @@ export const RegistrationForm: React.FC = () => {
               {...tailFormItemLayout}
               className="signup-form-button-wrapper"
             >
-              <Button type="primary" htmlType="submit" shape="round" onClick={handleSignUp} data-test-id="register-button">
+              <Button type="primary" htmlType="submit" shape="round" onClick={handleSignUp} data-testid="register-button">
                 Register
               </Button>
             </Form.Item>

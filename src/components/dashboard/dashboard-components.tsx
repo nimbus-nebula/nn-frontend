@@ -11,9 +11,13 @@ import {
   message,
   Input,
 } from "antd";
+import {useCookies} from 'react-cookie';
 import { useNavigate } from "react-router-dom";
 import { AntDesignOutlined } from "@ant-design/icons";
 import { props } from "./users-galaxy/users-galaxy-components";
+import axios from "axios";
+import * as Data from "../../fixtures/data";
+import {DOMAIN} from "../../fixtures/data";
 
 interface CreateFolderModalProps {
   visible: boolean;
@@ -93,7 +97,7 @@ export const NewButton: React.FC = () => {
           placement="bottomLeft"
           className="upload-new-file-button"
         >
-          <Button>+ NEW</Button>
+          <Button data-testid="dashboard-new-button">+ NEW</Button>
         </Dropdown>
       </Space>
       <CreateFolderModal
@@ -110,16 +114,27 @@ interface UserProfileProps {
 }
 
 export const UserProfile: React.FC<UserProfileProps> = ({ onLogout }) => {
-  const navigate = useNavigate();
 
-  const handleLogout = () => {
-    onLogout();
-    navigate("/");
+  const [cookie, setCookie, removeCookie] = useCookies();
+  const navigate = useNavigate();
+  const nnLogOut = async () => {
+    try {
+      console.log(`current cookie: ${cookie.cookieName}`);
+      console.log(`domain: ${DOMAIN}`);
+      removeCookie('refreshToken', { path: '/', domain: DOMAIN });
+      navigate("/");
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  const handleLogOut = () => {
+    nnLogOut();
   };
 
   const menu = (
     <Menu>
-      <Menu.Item key="logout" onClick={handleLogout}>
+      <Menu.Item key="logout" onClick={handleLogOut}>
         Log out
       </Menu.Item>
     </Menu>
