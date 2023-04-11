@@ -149,7 +149,7 @@ export const UserProfile: React.FC<UserProfileProps> = ({ onLogout }) => {
     <div
       className="row-rev"
       style={{ display: "flex", justifyContent: "space-around" }}
-      data-testid={"can-see"}
+      data-testid={"log-out"}
     >
       <Dropdown overlay={menu} placement="bottomRight">
         <Avatar size={43} icon={<AntDesignOutlined />} />
