@@ -229,7 +229,7 @@ describe("CreateNewFolderButton", () => {
         fireEvent.click(cancelButton);
 
         await waitFor(() => {
-            const modalAfterClosing = screen.queryByText("Name Your Cluster");
+            const modalAfterClosing = screen.queryByText("Name Your Cluster ");
             expect(modalAfterClosing).not.toBeInTheDocument();
         });
     });
