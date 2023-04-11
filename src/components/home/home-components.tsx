@@ -22,6 +22,7 @@ export const LogInForm: React.FC = () => {
       const res = await axios.post(`${Data.PORT}/auth/login`, payload);
       const cookies = res.data.refresh_token;
       setCookie('refreshToken', cookies);
+      Data.setUsername(email);
       navigate("/dashboard");
       console.log(res.data);
     } catch (e) {
