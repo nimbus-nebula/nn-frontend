@@ -80,6 +80,8 @@ export const NewButton: React.FC = () => {
       <Menu.Item
         key="create-folder"
         onClick={() => handleOptionSelect("createf")}
+        data-testid ="create-folder-menu-item"
+
       >
         <div>Create New Folder</div>
       </Menu.Item>
@@ -104,6 +106,7 @@ export const NewButton: React.FC = () => {
         visible={isModalVisible}
         onCreate={() => setIsModalVisible(false)}
         onCancel={() => setIsModalVisible(false)}
+        data-testid={"create-folder-modal-cancel"}
       />
     </Space>
   );
@@ -137,6 +140,7 @@ export const UserProfile: React.FC<UserProfileProps> = ({ onLogout }) => {
     <Menu>
       <Menu.Item key="logout" onClick={handleLogOut}>
         Log out
+        data-testid={"log-out"}
       </Menu.Item>
     </Menu>
   );
@@ -145,6 +149,7 @@ export const UserProfile: React.FC<UserProfileProps> = ({ onLogout }) => {
     <div
       className="row-rev"
       style={{ display: "flex", justifyContent: "space-around" }}
+      data-testid={"can-see"}
     >
       <Dropdown overlay={menu} placement="bottomRight">
         <Avatar size={43} icon={<AntDesignOutlined />} />
