@@ -5,6 +5,7 @@ import * as Data from "../../fixtures/data"
 import { useNavigate } from "react-router-dom";
 import {Button, ConfigProvider, Form, Input, message, Space} from "antd";
 
+
 interface DataNodeType {
   value: string;
   label: string;
@@ -39,7 +40,8 @@ export const RegistrationForm: React.FC = () => {
         "password": password
       };
       const res = await axios.post(`${Data.PORT}/auth/register`, payload);
-      navigate("/");
+      console.log("Navigating to home...");
+      navigate("/home");
       message.success("Succesfully Created a New Account!");
       console.log(res.data);
     } catch (e) {
@@ -62,12 +64,15 @@ export const RegistrationForm: React.FC = () => {
   };
 
   return (
+      <div data-testid="signup-page">
     <ConfigProvider
+
       theme={{
         token: {
           colorPrimary: "#A296CA",
         },
       }}
+
     >
       <Form
         className="signup-form"
@@ -79,10 +84,11 @@ export const RegistrationForm: React.FC = () => {
         layout="vertical"
         labelAlign="left"
         onValuesChange={handleUpdateValue}
+
       >
         <Space direction="vertical" size="middle">
-          <div className="form-fields-container">
-            <div className="form-fields-row">
+          <div className="form-fields-container" >
+            <div className="form-fields-row" >
               <Form.Item
                 name="firstname"
                 label={<label>First Name</label>}
@@ -207,8 +213,12 @@ export const RegistrationForm: React.FC = () => {
               </Button>
             </Form.Item>
           </div>
+
         </Space>
       </Form>
     </ConfigProvider>
+</div>
   );
 };
+
+

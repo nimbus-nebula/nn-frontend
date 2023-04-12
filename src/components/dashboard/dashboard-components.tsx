@@ -53,12 +53,20 @@ const CreateFolderModal: React.FC<CreateFolderModalProps> = ({
       cancelText="Cancel"
       maskClosable={false}
       closable={false}
+
     >
       <Input
         placeholder="folder name"
         value={newFolderName}
         onChange={(e) => setNewFolderName(e.target.value)}
       />
+      <Button
+          type="default"
+          onClick={handleCancel}
+          data-testid="create-folder-modal-cancel"
+      >
+        Cancel
+      </Button>
     </Modal>
   );
 };
@@ -80,8 +88,9 @@ export const NewButton: React.FC = () => {
       <Menu.Item
         key="create-folder"
         onClick={() => handleOptionSelect("createf")}
+
       >
-        <div>Create New Folder</div>
+        <div data-testID={"create-folder-menu-item"}>Create New Folder</div>
       </Menu.Item>
     </Menu>
   );
@@ -134,7 +143,7 @@ export const UserProfile: React.FC<UserProfileProps> = ({ onLogout }) => {
 
   const menu = (
     <Menu>
-      <Menu.Item key="logout" onClick={handleLogOut}>
+      <Menu.Item key="logout" onClick={handleLogOut} data-testid="log-out">
         Log out
       </Menu.Item>
     </Menu>
