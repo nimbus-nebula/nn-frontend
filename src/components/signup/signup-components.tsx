@@ -1,9 +1,9 @@
 import "./signup.css";
 import axios from "axios";
-import React, {useState} from "react";
-import * as Data from "../../fixtures/data"
+import React, { useState } from "react";
+import * as Data from "../../fixtures/data";
 import { useNavigate } from "react-router-dom";
-import {Button, ConfigProvider, Form, Input, message, Space} from "antd";
+import { Button, ConfigProvider, Form, Input, message, Space } from "antd";
 
 
 interface DataNodeType {
@@ -24,8 +24,8 @@ const tailFormItemLayout = {
 };
 
 export const RegistrationForm: React.FC = () => {
-
-  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{6,}$/;
+  const passwordRegex =
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{6,}$/;
 
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -36,8 +36,8 @@ export const RegistrationForm: React.FC = () => {
   const nnSignUp = async () => {
     try {
       const payload = {
-        "email": email,
-        "password": password
+        email: email,
+        password: password,
       };
       const res = await axios.post(`${Data.PORT}/auth/register`, payload);
       console.log("Navigating to home...");
@@ -45,10 +45,12 @@ export const RegistrationForm: React.FC = () => {
       message.success("Succesfully Created a New Account!");
       console.log(res.data);
     } catch (e) {
-      message.error("Failed to Create an Account. Please make sure that all input is valid.");
+      message.error(
+        "Failed to Create an Account. Please make sure that all input is valid."
+      );
       console.log(e);
     }
-  }
+  };
 
   const handleUpdateValue = (changedValues: any, allValues: any) => {
     setEmail(allValues.email);
@@ -102,7 +104,11 @@ export const RegistrationForm: React.FC = () => {
                 className="field-firstname"
                 data-testid="register-field-firstname"
               >
-                <Input placeholder="First Name" style={{ color: "#4A494D" }} data-testid="register-input-firstname"/>
+                <Input
+                  placeholder="First Name"
+                  style={{ color: "#4A494D" }}
+                  data-testid="register-input-firstname"
+                />
               </Form.Item>
 
               <Form.Item
@@ -118,7 +124,11 @@ export const RegistrationForm: React.FC = () => {
                 className="field-lastname"
                 data-testid="register-field-lastname"
               >
-                <Input placeholder="Last Name" style={{ color: "#4A494D" }} data-testid="register-input-lastname"/>
+                <Input
+                  placeholder="Last Name"
+                  style={{ color: "#4A494D" }}
+                  data-testid="register-input-lastname"
+                />
               </Form.Item>
             </div>
           </div>
@@ -139,7 +149,11 @@ export const RegistrationForm: React.FC = () => {
             className="field-email"
             data-testid="register-field-email"
           >
-            <Input placeholder="Email" style={{ color: "#4A494D" }} data-testid="register-input-email"/>
+            <Input
+              placeholder="Email"
+              style={{ color: "#4A494D" }}
+              data-testid="register-input-email"
+            />
           </Form.Item>
 
           <Form.Item
@@ -149,10 +163,11 @@ export const RegistrationForm: React.FC = () => {
               {
                 required: true,
                 message: "This field is required!",
-
               },
-              { pattern: passwordRegex,
-                message: "Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character."
+              {
+                pattern: passwordRegex,
+                message:
+                  "Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
               },
             ]}
             hasFeedback
@@ -178,7 +193,7 @@ export const RegistrationForm: React.FC = () => {
               },
               {
                 pattern: passwordRegex,
-                message: "The format of the password is not correct."
+                message: "The format of the password is not correct.",
               },
               ({ getFieldValue }) => ({
                 validator(_, value) {
@@ -208,7 +223,13 @@ export const RegistrationForm: React.FC = () => {
               {...tailFormItemLayout}
               className="signup-form-button-wrapper"
             >
-              <Button type="primary" htmlType="submit" shape="round" onClick={handleSignUp} data-testid="register-button">
+              <Button
+                type="primary"
+                htmlType="submit"
+                shape="round"
+                onClick={handleSignUp}
+                data-testid="register-button"
+              >
                 Register
               </Button>
             </Form.Item>

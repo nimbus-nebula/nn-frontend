@@ -1,15 +1,14 @@
 import axios from "axios";
-import React, {useState} from "react";
-import { useCookies } from 'react-cookie';
+import React, { useState } from "react";
+import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import {Button, ConfigProvider, Form, Input, message, Space} from "antd";
-import * as Data from "../../fixtures/data"
+import { Button, ConfigProvider, Form, Input, message, Space } from "antd";
+import * as Data from "../../fixtures/data";
+import { setAccessToken, setRefreshToken } from "../../fixtures/data";
 import { Link } from "react-router-dom";
-import {setAccessToken, setRefreshToken} from "../../fixtures/data";
 
 export const LogInForm: React.FC = () => {
-
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,7 +35,7 @@ export const LogInForm: React.FC = () => {
     } catch (e) {
       message.error('Invalid Email/Password!');
     }
-  }
+  };
 
   const handleUpdateValue = (changedValues: any, allValues: any) => {
     setEmail(allValues.email);

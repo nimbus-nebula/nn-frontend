@@ -11,13 +11,13 @@ import {
   message,
   Input,
 } from "antd";
-import {useCookies} from 'react-cookie';
+import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { AntDesignOutlined } from "@ant-design/icons";
 import { props } from "./users-galaxy/users-galaxy-components";
 import axios from "axios";
 import * as Data from "../../fixtures/data";
-import {DOMAIN} from "../../fixtures/data";
+import { DOMAIN } from "../../fixtures/data";
 
 interface CreateFolderModalProps {
   visible: boolean;
@@ -60,13 +60,6 @@ const CreateFolderModal: React.FC<CreateFolderModalProps> = ({
         value={newFolderName}
         onChange={(e) => setNewFolderName(e.target.value)}
       />
-      <Button
-          type="default"
-          onClick={handleCancel}
-          data-testid="create-folder-modal-cancel"
-      >
-        Cancel
-      </Button>
     </Modal>
   );
 };
@@ -123,19 +116,18 @@ interface UserProfileProps {
 }
 
 export const UserProfile: React.FC<UserProfileProps> = ({ onLogout }) => {
-
   const [cookie, setCookie, removeCookie] = useCookies();
   const navigate = useNavigate();
   const nnLogOut = async () => {
     try {
-      removeCookie('refreshToken', { path: '/', domain: DOMAIN });
-      removeCookie('accessToken', {path: '/', domain: DOMAIN})
+      removeCookie("refreshToken", { path: "/", domain: DOMAIN });
+      removeCookie("accessToken", { path: "/", domain: DOMAIN });
       navigate("/home");
       message.success("Log Out Successfully");
     } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   const handleLogOut = () => {
     nnLogOut();
