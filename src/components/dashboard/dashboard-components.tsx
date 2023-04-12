@@ -46,7 +46,7 @@ const CreateFolderModal: React.FC<CreateFolderModalProps> = ({
   return (
     <Modal
       title="Create new folder"
-      visible={visible}
+      open={visible}
       onOk={handleOk}
       onCancel={handleCancel}
       okText="Create"
