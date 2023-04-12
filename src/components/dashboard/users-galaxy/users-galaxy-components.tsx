@@ -28,6 +28,10 @@ export const props: UploadProps = {
   multiple: true,
   customRequest: async (options) => {
     const { file, onSuccess, onError, onProgress } = options;
+    if (!file) {
+      console.log("file is empty");
+      return;
+    }
     const formData = new FormData();
     formData.append('file', file);
     try {
@@ -37,7 +41,6 @@ export const props: UploadProps = {
           {
             headers: {
               ...getHeaders(Data.getAccessToken(), Data.getRefreshToken()),
-              'Content-Type': 'multipart/form-data',
             },
             withCredentials: true,
             onUploadProgress: (progressEvent) => {
@@ -45,7 +48,6 @@ export const props: UploadProps = {
               const { loaded, total } = progressEvent;
               const progress = Math.round((loaded / Number(total)) * 100);
               if (onProgress) {
-                console.log(formData, "hahahahahhahahhahahahahha");
                 message.info("uploading");
                 onProgress({ percent: progress });
               }
