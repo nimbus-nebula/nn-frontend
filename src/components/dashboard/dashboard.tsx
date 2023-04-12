@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../App.css";
 import "./dashboard.css";
 import {
@@ -14,6 +14,9 @@ import { Trash } from "./trash/trash";
 import { Logo } from "../global-components";
 import { Recent } from "./recent/recent";
 import { Content } from "antd/es/layout/layout";
+import {GetData, verifyAccount} from "./users-galaxy/users-galaxy-components";
+import { Cookies } from "react-cookie";
+import * as Data from "../../fixtures/data";
 
 const { Header, Footer, Sider } = Layout;
 const sections: string[][] = [
@@ -45,11 +48,23 @@ const selectContent = (key: string) => {
 };
 
 export function Dashboard() {
+  const cookies = new Cookies();
   const [collapsed, setCollapsed] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState("galaxy");
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  useEffect(() => {
+    const refreshToken = cookies.get("refreshToken");
+    const accessToken = cookies.get("accessToken");
+    Data.setRefreshToken(refreshToken);
+    Data.setAccessToken(accessToken);
+    document.title = "NimbusNebula";
+    verifyAccount(accessToken, refreshToken);
+    GetData().then((data) => {
+      console.log(data);
+    });
+  }, []);
   return (
     <ConfigProvider
       theme={{

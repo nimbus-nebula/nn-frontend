@@ -1,115 +1,141 @@
-import React, { useState } from "react";
-import {FileOutlined, InboxOutlined} from "@ant-design/icons";
+import React, { useEffect, useState } from "react";
+import { FileOutlined, InboxOutlined } from "@ant-design/icons";
 import type { UploadProps } from "antd";
-import {Button, message, Upload, Modal, Empty} from "antd";
+import { Button, message, Upload, Modal, Empty } from "antd";
+import * as Data from "../../../fixtures/data";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+import * as events from "events";
 
 const { Dragger } = Upload;
 
-//TODO
+export function verifyAccount(accessToken: string, refreshToken: string) {
+  const headers = getHeaders(accessToken, refreshToken);
+  const res = axios.get(`${Data.PORT}/auth/me`, {
+    headers,
+    withCredentials: true,
+  });
+}
+
+function getHeaders(accessToken: string, refreshToken: string) {
+  return {
+    authorization: `Bearer ${accessToken}`,
+    cookie: `refreshToken=${refreshToken}`,
+  };
+}
+
 export const props: UploadProps = {
-  name: "file",
   multiple: true,
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
+  customRequest: async (options) => {
+    const { file, onSuccess, onError, onProgress } = options;
+    if (!file) {
+      console.log("file is empty");
+      return;
     }
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
+    const formData = new FormData();
+    formData.append('file', file);
+    try {
+      const response = await axios.post(
+          `${Data.PORT}/s3/upload`,
+          formData,
+          {
+            headers: {
+              ...getHeaders(Data.getAccessToken(), Data.getRefreshToken()),
+            },
+            withCredentials: true,
+            onUploadProgress: (progressEvent) => {
+              if (!progressEvent) return;
+              const { loaded, total } = progressEvent;
+              const progress = Math.round((loaded / Number(total)) * 100);
+              if (onProgress) {
+                message.info("uploading");
+                onProgress({ percent: progress });
+              }
+            },
+          },
+      );
+      if (onSuccess) {
+        message.success("file uploaded successfully");
+        onSuccess(response.data);
+        GetData();
+      }
+    } catch (error: any) {
+        if (onError) {
+          message.error("file failed to upload");
+          onError(error);
+          return;
+        }
     }
-  },
-  onDrop(e) {
-    console.log("Dropped files", e.dataTransfer.files);
   },
 };
 
-export const UploadFilesButton: React.FC = () => (
-  <Dragger {...props}>
-    <p
-      className="ant-upload-drag-icon"
-      style={{ scale: "1.1", overflow: "auto" }}
+export const UploadFilesButton: React.FC = () => {
+  const [accessTokenCookies] = useCookies(["accessToken"]);
+  const [refreshTokenCookies] = useCookies(["refreshToken"]);
+  const accessToken = accessTokenCookies.accessToken;
+  const refreshToken = refreshTokenCookies.refreshToken;
+  Data.setAccessToken(accessToken);
+  Data.setRefreshToken(refreshToken);
+
+  return (
+    <Dragger
+        {...props}
     >
-      <InboxOutlined />
-    </p>
-    <p className="ant-upload-text" style={{ fontSize: "20px" }}>
-      Click or drag file to this area to upload
-    </p>
-    <p className="ant-upload-hint">
-      Support for a single or bulk upload. Strictly prohibited from uploading
-      company data or other banned files.
-    </p>
-  </Dragger>
-);
+      <p
+        className="ant-upload-drag-icon"
+        style={{ scale: "1.1", overflow: "auto" }}
+      >
+        <InboxOutlined />
+      </p>
+      <p className="ant-upload-text" style={{ fontSize: "20px" }}>
+        Click or drag file to this area to upload
+      </p>
+      <p className="ant-upload-hint">
+        Support for a single or bulk upload. Strictly prohibited from uploading
+        company data or other banned files.
+      </p>
+    </Dragger>
+  );
+};
 
 interface FileGridProps {
-    files: any[];
+  files: any[];
 }
 
 export const FileSection: React.FC<FileGridProps> = ({ files }) => {
-    if (files.length > 0) {
-        return (
-            <div className="file-grid">
-                {files.map((file: any) => (
-                    <div key={file.filename} className="file-item">
-                        <FileOutlined style={{ fontSize: '35px' }} />
-                        <a href={file.url} target="_blank" rel="noopener noreferrer" className="file-link">
-                            {file.filename}
-                        </a>
-                    </div>
-                ))}
-            </div>
-        );
-    }
+  if (files.length > 0) {
     return (
-        <Empty style={{ background: "#f0f0f0", padding: "5px" }}></Empty>
+      <div className="file-grid">
+        {files.map((file: any) => (
+          <div key={file.filename} className="file-item">
+            <FileOutlined style={{ fontSize: "35px" }} />
+            <a
+              href={file.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="file-link"
+            >
+              {file.filename}
+            </a>
+          </div>
+        ))}
+      </div>
     );
+  }
+  return <Empty style={{ background: "#f0f0f0", padding: "5px" }}></Empty>;
 };
 
-export const CreateNewFolderButton: React.FC = () => {
-  const [open, setOpen] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState("Content of the modal");
-
-  const showModal = () => {
-    setOpen(true);
-  };
-
-  const createFolder = () => {
-    // TODO
-    setModalText("The modal will be closed after two seconds");
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setOpen(false);
-      setConfirmLoading(false);
-    }, 2000);
-  };
-
-  const cancelCreateFolder = () => {
-    // TODO
-    setOpen(false);
-  };
-
-  return (
-    <>
-      <Button
-        shape="default"
-        onClick={showModal}
-        style={{ padding: "50px 30px", fontSize: "25px" }}
-      >
-        New Folder
-      </Button>
-      <Modal
-        title="Name Your Cluster"
-        open={open}
-        onOk={createFolder}
-        confirmLoading={confirmLoading}
-        onCancel={cancelCreateFolder}
-      >
-        <p>{modalText}</p>
-      </Modal>
-    </>
-  );
+export const GetData = async () => {
+  const refreshToken = Data.getRefreshToken();
+  const accessToken = Data.getAccessToken();
+  const headers = getHeaders(accessToken, refreshToken);
+  try {
+    const res = await axios.get(`${Data.PORT}/s3/list`, {
+      headers,
+      withCredentials: true,
+    });
+    console.log(res);
+  } catch (e) {
+    console.log(e);
+  }
 };
