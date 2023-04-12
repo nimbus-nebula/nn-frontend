@@ -40,7 +40,8 @@ export const RegistrationForm: React.FC = () => {
         "password": password
       };
       const res = await axios.post(`${Data.PORT}/auth/register`, payload);
-      navigate("/");
+      console.log("Navigating to home...");
+      navigate("/home");
       message.success("Succesfully Created a New Account!");
       console.log(res.data);
     } catch (e) {
