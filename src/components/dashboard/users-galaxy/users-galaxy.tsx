@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Empty, Typography } from "antd";
-import { FileOutlined } from '@ant-design/icons';
-import { UploadFilesButton } from "./users-galaxy-components";
+import {FileSection, UploadFilesButton} from "./users-galaxy-components";
 import "../dashboard.css";
 
 const { Title } = Typography;
@@ -28,20 +27,7 @@ export const UsersGalaxy: React.FC = () => {
       <Title level={2}>Upload New File</Title>
       <UploadFilesButton></UploadFilesButton>
       <Title level={2}>Files</Title>
-      {files.length > 0 ? (
-        <div className="file-grid">
-          {files.map((file: any) => (
-            <div key={file.filename} className="file-item">
-              <FileOutlined style={{ fontSize: '35px' }} />
-              <a href={file.url} target="_blank" rel="noopener noreferrer" className="file-link">
-                {file.filename}
-              </a>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <Empty style={{ background: "#f0f0f0", padding: "5px" }}></Empty>
-      )}
+      <FileSection files={files}></FileSection>
       <Title level={2}>Folders</Title>
       <Empty style={{ background: "#f0f0f0", padding: "5px" }}></Empty>
     </div>

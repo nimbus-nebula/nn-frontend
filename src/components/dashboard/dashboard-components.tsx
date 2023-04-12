@@ -128,10 +128,9 @@ export const UserProfile: React.FC<UserProfileProps> = ({ onLogout }) => {
   const navigate = useNavigate();
   const nnLogOut = async () => {
     try {
-      console.log(`current cookie: ${cookie.cookieName}`);
-      console.log(`domain: ${DOMAIN}`);
       removeCookie('refreshToken', { path: '/', domain: DOMAIN });
-      navigate("/");
+      removeCookie('accessToken', {path: '/', domain: DOMAIN})
+      navigate("/home");
       message.success("Log Out Successfully");
     } catch (e) {
       console.log(e);
@@ -144,9 +143,8 @@ export const UserProfile: React.FC<UserProfileProps> = ({ onLogout }) => {
 
   const menu = (
     <Menu>
-      <Menu.Item key="logout" onClick={handleLogOut}>
+      <Menu.Item key="logout" onClick={handleLogOut} data-testid="log-out">
         Log out
-        data-testid={"log-out"}
       </Menu.Item>
     </Menu>
   );
@@ -155,7 +153,6 @@ export const UserProfile: React.FC<UserProfileProps> = ({ onLogout }) => {
     <div
       className="row-rev"
       style={{ display: "flex", justifyContent: "space-around" }}
-      data-testid={"log-out"}
     >
       <Dropdown overlay={menu} placement="bottomRight">
         <Avatar size={43} icon={<AntDesignOutlined />} />
